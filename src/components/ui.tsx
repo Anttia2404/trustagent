@@ -60,7 +60,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-[.1em]',
+        'badge inline-flex items-center gap-1.5 border px-2.5 py-1 font-mono text-[10px] font-medium',
         tone === 'neutral' && 'border-white/10 bg-white/[.035] text-[#a5aea9]',
         tone === 'green' && 'border-[#b7f77a]/20 bg-[#b7f77a]/[.08] text-[#c8ff9b]',
         tone === 'blue' && 'border-sky-300/20 bg-sky-300/[.08] text-sky-200',

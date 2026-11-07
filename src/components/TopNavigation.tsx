@@ -4,10 +4,11 @@ import { BrandMark } from './BrandMark';
 import { Button } from './ui';
 
 const links = [
-  { label: 'Agents', href: '#agents' },
-  { label: 'Trust layer', href: '#trust' },
+  { label: 'Product', href: '#product' },
   { label: 'Evidence', href: '#evidence' },
-  { label: 'Contribute', href: '#community' },
+  { label: 'Legal agents', href: '#agents' },
+  { label: 'Infrastructure', href: '#infrastructure' },
+  { label: 'Global', href: '#global' },
 ];
 
 export function TopNavigation({ onDocsClick }: { onDocsClick: () => void }) {
