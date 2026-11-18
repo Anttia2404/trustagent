@@ -36,7 +36,7 @@ function HeroSection({ onDocsClick }: { onDocsClick: () => void }) {
       <div className="hero-copy">
         <p className="eyebrow"><span className="eyebrow-rule" /> Legal intelligence infrastructure <span className="eyebrow-location">Vietnam · built to travel</span></p>
         <h1>Legal answers,<br /><em>grounded in the law.</em></h1>
-        <p className="hero-subtitle">TrustAgent helps people and AI agents find, understand, and verify Vietnamese legal information against its source.</p>
+        <p className="hero-subtitle">TrustAgent helps people and AI agents find and understand Vietnamese legal information, then inspect the cited sources behind an answer.</p>
         <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><Button variant="secondary" onClick={onDocsClick}>Developer docs <ArrowUpRight size={15} /></Button></div>
         <p className="hero-product-note"><span><Check size={14} /> Version-aware sources</span><span><Check size={14} /> Cited provisions</span><span><Check size={14} /> Evidence trail</span></p>
       </div>
