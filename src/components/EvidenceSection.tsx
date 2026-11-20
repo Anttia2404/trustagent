@@ -4,12 +4,12 @@ import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
 
 const fields = [
-  ['Request ID', 'DEMO · not generated'],
-  ['Legal document version', 'Illustrative · pending source'],
-  ['RAG index version', 'Not connected'],
-  ['Answer hash', 'Not generated'],
-  ['Batch ID', 'No batch committed'],
-  ['Transaction reference', 'No on-chain anchor'],
+  ['Receipt ID', 'Created on paid traffic route'],
+  ['Index version', 'Set by deployment'],
+  ['Answer SHA-256', 'Included in receipt'],
+  ['Citation references', 'Document · law · article · source'],
+  ['Evidence text hash', 'Included when available'],
+  ['Batch / chain anchor', 'Optional · not automated'],
 ];
 
 export function EvidenceSection() {
@@ -19,10 +19,10 @@ export function EvidenceSection() {
         <Reveal>
           <div className="evidence-heading-grid">
             <SectionHeading
-              index="03"
-              eyebrow="VERIFIABLE LEGAL EVIDENCE"
-              title={<>Every Answer Leaves<br /><span>Verifiable Evidence.</span></>}
-              description="A user or external agent submits a legal question; TrustAgent retrieves relevant documents, resolves version, effective date and provisions, then returns a cited answer with an evidence record. Batch commitments enable independent integrity checks."
+              index="02"
+              eyebrow="CITATIONS & PROVENANCE"
+              title={<>Inspect the sources<br /><span>behind an answer.</span></>}
+              description="The paid traffic endpoint can return a provenance receipt with an answer hash, citation references and index version. Effective-date metadata is uneven across the legal corpus."
             />
             <div className="evidence-principle">
               <div className="evidence-principle__icon"><FileCheck2 size={18} /></div>
@@ -32,7 +32,7 @@ export function EvidenceSection() {
         </Reveal>
 
         <Reveal className="evidence-pipeline-wrap">
-          <div className="pipeline-header"><span className="mono-label">EVIDENCE PIPELINE</span><Badge tone="amber">DESIGN PREVIEW</Badge></div>
+          <div className="pipeline-header"><span className="mono-label">PAID TRAFFIC RECEIPT FLOW</span><Badge tone="amber">RECEIPT ONLY WHEN X402 IS ENABLED</Badge></div>
           <div className="evidence-pipeline">
             {evidenceSteps.map((step, index) => {
               const Icon = step.icon;
@@ -48,19 +48,19 @@ export function EvidenceSection() {
               );
             })}
           </div>
-          <div className="pipeline-caption"><span className="pipeline-caption__line" /> From versioned source to independent integrity check <ArrowDown size={13} /></div>
+          <div className="pipeline-caption"><span className="pipeline-caption__line" /> Receipt verification checks integrity, not the legal correctness of an answer <ArrowDown size={13} /></div>
         </Reveal>
 
         <Reveal className="evidence-explorer-grid">
           <div className="evidence-copy">
-            <span className="mono-label">VERIFIABLE BY REFERENCE</span>
-            <h3>One answer.<br />A traceable evidence trail.</h3>
-            <p>Each record is designed to retain a legal document hash, document version and effective date, RAG index/version, cited provisions, answer hash, timestamp and request identifier — plus batch references when available.</p>
+            <span className="mono-label">PROVENANCE RECEIPT</span>
+            <h3>Trace what was returned.<br />Keep correctness separate.</h3>
+            <p>When x402 is enabled, the paid traffic route creates a receipt with a timestamp, index version, answer SHA-256 and citation details. Citation text hashes are recorded when present.</p>
             <ul className="evidence-list">
-              <li><Check size={15} /> Source document hash, version and effective date</li>
-              <li><Check size={15} /> RAG index version and referenced legal provisions</li>
-              <li><Check size={15} /> Answer hash, timestamp and request ID</li>
-              <li><Check size={15} /> Batch commitment and independent verification</li>
+              <li><Check size={15} /> Receipt ID, timestamp and configured index version</li>
+              <li><Check size={15} /> Answer hash and cited source references</li>
+              <li><Check size={15} /> Evidence text hash when available</li>
+              <li><Check size={15} /> Optional Merkle batch proof</li>
             </ul>
           </div>
 
@@ -68,17 +68,17 @@ export function EvidenceSection() {
             <div className="explorer-topbar">
               <div className="explorer-window-dots"><i /><i /><i /></div>
               <span>Evidence explorer</span>
-              <Badge tone="amber">ILLUSTRATIVE DATA</Badge>
+              <Badge tone="amber">ILLUSTRATIVE UI</Badge>
             </div>
-            <div className="explorer-status"><span><CircleHelp size={15} /> No production record loaded</span><span className="explorer-status__badge">DEMO</span></div>
+            <div className="explorer-status"><span><CircleHelp size={15} /> No backend receipt loaded</span><span className="explorer-status__badge">DEMO</span></div>
             <div className="explorer-fields">
               {fields.map(([label, value]) => <div className="explorer-field" key={label}><span>{label}</span><strong>{value}</strong></div>)}
             </div>
-            <div className="explorer-verification"><div className="explorer-verification__icon"><ShieldCheck size={16} /></div><div><strong>Verification result</strong><span>Illustrative only · no batch to verify</span></div><Badge tone="neutral">NOT RUN</Badge></div>
+            <div className="explorer-verification"><div className="explorer-verification__icon"><ShieldCheck size={16} /></div><div><strong>Integrity verification</strong><span>Illustrative · no receipt loaded</span></div><Badge tone="neutral">NOT RUN</Badge></div>
           </div>
         </Reveal>
 
-        <div className="evidence-caveat"><ShieldCheck size={15} /><span>Anchoring is shown as an optional design path, not a live integration. Hash algorithm and production transaction references are intentionally left unspecified pending backend confirmation.</span></div>
+        <div className="evidence-caveat"><ShieldCheck size={15} /><span>A valid hash or Merkle proof only shows that recorded data matches the receipt; it does not validate legal reasoning. Effective-date metadata is incomplete, and a document status of unknown does not confirm that it is currently in force.</span></div>
       </div>
     </section>
   );

@@ -90,7 +90,7 @@ export function SectionHeading({
   description,
   className,
 }: {
-  index: string;
+  index?: string;
   eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
@@ -99,7 +99,7 @@ export function SectionHeading({
   return (
     <div className={cn('section-heading', className)}>
       <div className="section-heading__meta">
-        <span className="section-index">{index}</span>
+        {index && <span className="section-index">{index}</span>}
         <span className="section-heading__eyebrow">{eyebrow}</span>
       </div>
       <h2>{title}</h2>
