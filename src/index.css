@@ -381,6 +381,7 @@ a { color: inherit; text-decoration: none; }
 .architecture-layer__label strong { font-size: 11px; font-weight: 600; }
 .architecture-layer__label small { color: #778074; font: 8px var(--mono); }
 .architecture-layer__flow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.architecture-node-wrap { display: inline-flex; align-items: center; gap: 8px; }
 .architecture-node { display: inline-flex; align-items: center; min-height: 34px; padding: 5px 9px; color: #526053; background: #efeee6; font-size: 12px; line-height: 1.35; }
 .architecture-node--start { color: var(--forest); background: #e2e8df; }
 .architecture-node__arrow { color: #7c897c; }
