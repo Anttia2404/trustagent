@@ -3,8 +3,7 @@ import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from './BrandMark';
 import { ActionLink } from './ui';
 
-// Where "Vào ứng dụng" leads. Set VITE_APP_URL at build time to point at the deployed app.
-const APP_URL: string = import.meta.env.VITE_APP_URL || '/app';
+const APP_URL = 'https://trust-agent-eight.vercel.app/';
 
 const links = [
   { label: 'Agent', href: '#agents' },
