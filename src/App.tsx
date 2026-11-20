@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, FileCheck2, FileText, Globe2, Layers3, ShieldCheck } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, BookOpen, Check, FileCheck2, FileText, Globe2, Layers3, ShieldCheck } from 'lucide-react';
 import { ActionLink } from './components/ui';
 import { TopNavigation } from './components/TopNavigation';
 import { TrustRegistrySection } from './components/TrustRegistrySection';
@@ -18,7 +18,7 @@ function HeroSection() {
       <div className="hero-copy">
         <h1>Legal answers,<br /><em>grounded in the law.</em></h1>
         <p className="hero-subtitle">TrustAgent helps people and AI agents find, understand, and verify Vietnamese legal information against its source.</p>
-        <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><ActionLink variant="secondary" href={apiReadmeUrl} target="_blank" rel="noreferrer">API README <ArrowUpRight size={15} /></ActionLink></div>
+        <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">Trace an answer <ArrowDown size={16} aria-hidden="true" /></ActionLink><ActionLink variant="secondary" href={apiReadmeUrl} target="_blank" rel="noreferrer">API README <ArrowUpRight size={15} /></ActionLink></div>
         <p className="hero-product-note"><span><Check size={14} /> Vietnamese legal corpus</span><span><Check size={14} /> Cited provisions</span><span><Check size={14} /> Evidence checks</span></p>
       </div>
       <div className="hero-visual" aria-label="Illustrative legal answer preview">
@@ -55,7 +55,7 @@ function ProductDemoSection() {
           <div className="workbench-result"><div className="workbench-result__header"><span><ShieldCheck size={15} /> Cited answer</span><span>Vietnamese</span></div><p>Both the motorcycle driver and passengers must wear a helmet that meets national technical standards and fasten it correctly.</p><a href={lawSource} target="_blank" rel="noreferrer"><span>Article 33(2)</span> Open source text <ArrowUpRight size={14} /></a></div>
           <p className="workbench-disclaimer">Informational assistance only · not a substitute for professional legal advice.</p>
         </div>
-        <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div><ArrowUpRight size={15} /></div><div className="source-detail"><span>Jurisdiction</span><strong>Vietnam</strong></div><div className="source-detail"><span>Effective date</span><strong>01 Jan 2025</strong></div><div className="source-detail"><span>Reference</span><strong>Article 33(2)</strong></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
+        <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div></div><div className="source-detail"><span>Jurisdiction</span><strong>Vietnam</strong></div><div className="source-detail"><span>Effective date</span><strong>01 Jan 2025</strong></div><div className="source-detail"><span>Reference</span><strong>Article 33(2)</strong></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
       </div>
       <div className="product-demo-caption"><span>Question</span><i /><span>Retrieved document</span><i /><span>Relevant provision</span><i /><span>Cited answer</span></div>
     </div>

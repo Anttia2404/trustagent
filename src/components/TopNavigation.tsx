@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from './BrandMark';
 import { ActionLink } from './ui';
@@ -12,8 +12,45 @@ const links = [
   { label: 'Global', href: '#global' },
 ];
 
+/** Page sections in document order. Sections without a nav link clear the highlight. */
+const sectionOrder = ['product', 'evidence', 'agents', 'infrastructure', 'community', 'global', 'developers'];
+const linkedSections = new Set(links.map((link) => link.href.slice(1)));
+
+/** Returns the id of the nav-linked section currently under the top third of the viewport. */
+function useActiveSection() {
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const readingLine = window.innerHeight * 0.35;
+      let current: string | null = null;
+      for (const id of sectionOrder) {
+        const element = document.getElementById(id);
+        if (element && element.getBoundingClientRect().top <= readingLine) current = id;
+      }
+      setActive(current && linkedSections.has(current) ? current : null);
+    };
+    const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
+
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return active;
+}
+
 export function TopNavigation() {
   const [open, setOpen] = useState(false);
+  const activeSection = useActiveSection();
+  const currentProps = (href: string) => (href.slice(1) === activeSection ? { 'aria-current': 'location' as const } : {});
 
   const closeMenu = () => setOpen(false);
 
@@ -26,7 +63,7 @@ export function TopNavigation() {
         </a>
 
         <nav className="desktop-nav" aria-label="Main navigation">
-          {links.map((link) => <a key={link.href} href={link.href}>{link.label}</a>)}
+          {links.map((link) => <a key={link.href} href={link.href} {...currentProps(link.href)}>{link.label}</a>)}
         </nav>
 
         <div className="site-header__actions">
@@ -49,7 +86,7 @@ export function TopNavigation() {
       {open && (
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={closeMenu}>{link.label}</a>
+            <a key={link.href} href={link.href} onClick={closeMenu} {...currentProps(link.href)}>{link.label}</a>
           ))}
           <a href={apiReadmeUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>
             API README <ArrowUpRight size={15} aria-hidden="true" />

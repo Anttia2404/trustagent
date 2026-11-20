@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Activity, ArrowRight, Check, CircleDollarSign, Code2, FileCheck2, Play, ShieldCheck, WalletCards } from 'lucide-react';
+import { Activity, Check, CircleDollarSign, Code2, FileCheck2, Play, ShieldCheck, WalletCards } from 'lucide-react';
 import { paymentSteps } from '../lib/content';
 import { Badge, Button, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -83,7 +83,7 @@ export function PaymentSection() {
               <div className="response-document-icon"><FileCheck2 size={19} /></div>
               <h3>Vietnamese traffic regulations</h3>
               <p>The paid route returns an answer, legal citations and a provenance receipt when x402 is enabled.</p>
-              <div className="citation-preview"><span className="citation-preview__mark">§</span><div><strong>Legal citation</strong><span>Article 33(2)</span></div><ArrowRight size={14} /></div>
+              <div className="citation-preview"><span className="citation-preview__mark">§</span><div><strong>Legal citation</strong><span>Article 33(2)</span></div></div>
               <div className="receipt-preview"><div className="receipt-preview__icon"><ShieldCheck size={15} /></div><div><strong>Provenance receipt</strong><span>Returned by the paid route</span></div></div>
             </div>
           </div>

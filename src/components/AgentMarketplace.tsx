@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Database, Fingerprint, ShieldCheck, X } from 'lucide-react';
+import { ArrowRight, Database, Fingerprint, ShieldCheck, X } from 'lucide-react';
 import { agents, type LegalAgent } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -69,8 +69,8 @@ export function AgentMarketplace() {
                     <div className="agent-meta-row"><span><Database size={13} /> Chroma collection</span><strong>{agent.collection}</strong></div>
                     <div className="agent-meta-row"><span><ShieldCheck size={13} /> Citation checks</span><strong>Implemented</strong></div>
                   </div>
-                  <button type="button" className="agent-card__action" onClick={() => setSelected(agent)}>
-                    View Agent Details <ArrowUpRight size={15} />
+                  <button type="button" className="agent-card__action" onClick={() => setSelected(agent)} aria-haspopup="dialog" aria-label={`View ${agent.name} details`}>
+                    View details <ArrowRight size={15} aria-hidden="true" />
                   </button>
                 </article>
               </Reveal>
