@@ -3,6 +3,9 @@ import { BookOpenCheck, Calculator, FileText, BriefcaseBusiness, ShieldCheck, Fi
 
 export type AgentStatus = 'IMPLEMENTED' | 'ROADMAP';
 
+/** Backend API and setup docs live in the project README until dedicated docs exist. */
+export const apiReadmeUrl = 'https://github.com/minhtangithu0b123/Trust-Agent/blob/develop/README.md';
+
 export interface LegalAgent {
   domain: 'traffic' | 'labor' | 'tax';
   collection: string;

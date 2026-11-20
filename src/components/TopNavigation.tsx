@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { BrandMark } from './BrandMark';
-import { Button } from './ui';
+import { ActionLink } from './ui';
+import { apiReadmeUrl } from '../lib/content';
 
 const links = [
   { label: 'Product', href: '#product' },
@@ -11,7 +12,7 @@ const links = [
   { label: 'Global', href: '#global' },
 ];
 
-export function TopNavigation({ onDocsClick }: { onDocsClick: () => void }) {
+export function TopNavigation() {
   const [open, setOpen] = useState(false);
 
   const closeMenu = () => setOpen(false);
@@ -30,9 +31,9 @@ export function TopNavigation({ onDocsClick }: { onDocsClick: () => void }) {
 
         <div className="site-header__actions">
           <span className="header-status"><span className="status-dot" /> Infrastructure preview</span>
-          <Button className="header-cta" onClick={onDocsClick}>
-            Developer docs <ArrowUpRight size={14} aria-hidden="true" />
-          </Button>
+          <ActionLink className="header-cta" href={apiReadmeUrl} target="_blank" rel="noreferrer">
+            API README <ArrowUpRight size={14} aria-hidden="true" />
+          </ActionLink>
           <button
             type="button"
             className="mobile-menu-button"
@@ -50,9 +51,9 @@ export function TopNavigation({ onDocsClick }: { onDocsClick: () => void }) {
           {links.map((link) => (
             <a key={link.href} href={link.href} onClick={closeMenu}>{link.label}</a>
           ))}
-          <button type="button" onClick={() => { closeMenu(); onDocsClick(); }}>
-            Developer docs <ArrowUpRight size={15} />
-          </button>
+          <a href={apiReadmeUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>
+            API README <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
         </nav>
       )}
     </header>

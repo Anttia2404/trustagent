@@ -1,7 +1,5 @@
-import { useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, FileCheck2, FileText, Globe2, Layers3, ShieldCheck, X } from 'lucide-react';
-import { ActionLink, Button } from './components/ui';
+import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, FileCheck2, FileText, Globe2, Layers3, ShieldCheck } from 'lucide-react';
+import { ActionLink } from './components/ui';
 import { TopNavigation } from './components/TopNavigation';
 import { TrustRegistrySection } from './components/TrustRegistrySection';
 import { AgentMarketplace } from './components/AgentMarketplace';
@@ -10,35 +8,18 @@ import { PaymentSection } from './components/PaymentSection';
 import { CommunitySection } from './components/CommunitySection';
 import { ArchitectureSection } from './components/ArchitectureSection';
 import { BrandMark } from './components/BrandMark';
-import { useDialogAccessibility } from './hooks/useDialogAccessibility';
+import { apiReadmeUrl } from './lib/content';
 
 const lawSource = 'https://xaydungchinhsach.chinhphu.vn/toan-van-luat-trat-tu-an-toan-giao-thong-duong-bo-119240909105718285.htm';
 
-function DocsDialog({ onClose }: { onClose: () => void }) {
-  const { dialogRef, closeButtonRef } = useDialogAccessibility(onClose);
-  const reduceMotion = useReducedMotion();
-  return (
-    <div className="dialog-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <motion.div className="docs-dialog" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title" ref={dialogRef} tabIndex={-1} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: 8 }} transition={{ duration: reduceMotion ? 0 : 0.18 }}>
-        <button ref={closeButtonRef} className="dialog-close" type="button" onClick={onClose} aria-label="Close dialog"><X size={18} /></button>
-        <div className="docs-dialog__icon"><BookOpen size={20} /></div>
-        <p className="eyebrow">Developer documentation</p>
-        <h2 id="docs-dialog-title">Developer docs are in preparation.</h2>
-        <p>The backend API and setup instructions are documented in the project README. This page does not connect to a live legal query or payment session.</p>
-        <div className="docs-dialog__links"><a href="https://github.com/minhtangithu0b123/Trust-Agent/blob/develop/README.md" target="_blank" rel="noreferrer" onClick={onClose}>Read backend README <ArrowUpRight size={14} /></a><a href="#payment" onClick={onClose}>See the x402 flow <ArrowRight size={14} /></a><a href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" rel="noreferrer" onClick={onClose}>Read ERC-8004 standard <ArrowUpRight size={14} /></a></div>
-      </motion.div>
-    </div>
-  );
-}
-
-function HeroSection({ onDocsClick }: { onDocsClick: () => void }) {
+function HeroSection() {
   return <section className="hero-section" id="top">
     <div className="shell hero-layout">
       <div className="hero-copy">
         <p className="eyebrow"><span className="eyebrow-rule" /> Legal intelligence infrastructure <span className="eyebrow-location">Vietnam · built to travel</span></p>
         <h1>Legal answers,<br /><em>grounded in the law.</em></h1>
         <p className="hero-subtitle">TrustAgent helps people and AI agents find, understand, and verify Vietnamese legal information against its source.</p>
-        <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><Button variant="secondary" onClick={onDocsClick}>Developer docs <ArrowUpRight size={15} /></Button></div>
+        <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><ActionLink variant="secondary" href={apiReadmeUrl} target="_blank" rel="noreferrer">API README <ArrowUpRight size={15} /></ActionLink></div>
         <p className="hero-product-note"><span><Check size={14} /> Vietnamese legal corpus</span><span><Check size={14} /> Cited provisions</span><span><Check size={14} /> Evidence checks</span></p>
       </div>
       <div className="hero-visual" aria-label="Illustrative legal answer preview">
@@ -82,10 +63,10 @@ function ProductDemoSection() {
   </section>;
 }
 
-function FinalCallToAction({ onDocsClick }: { onDocsClick: () => void }) {
+function FinalCallToAction() {
   return <section className="final-cta-section" id="developers"><div className="shell final-cta">
-    <div><p className="eyebrow">Infrastructure for people and agents</p><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Review the implemented legal domains, evidence checks and optional paid traffic API route.</p></div>
-    <div className="final-cta__actions"><ActionLink href="#agents" className="hero-action-primary">Explore legal agents <ArrowUpRight size={15} /></ActionLink><Button variant="secondary" onClick={onDocsClick}>Developer docs <ArrowUpRight size={15} /></Button></div>
+    <div><p className="eyebrow">Infrastructure for people and agents</p><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Endpoints, setup and the optional paid traffic route are documented in the backend README.</p></div>
+    <div className="final-cta__actions"><ActionLink href={apiReadmeUrl} target="_blank" rel="noreferrer" className="hero-action-primary">Read the API README <ArrowUpRight size={15} /></ActionLink><ActionLink variant="secondary" href="#agents">Explore legal agents <ArrowRight size={15} /></ActionLink></div>
   </div></section>;
 }
 
@@ -94,11 +75,10 @@ function SiteFooter() {
 }
 
 export default function App() {
-  const [docsOpen, setDocsOpen] = useState(false);
   return <div className="app-shell">
-    <TopNavigation onDocsClick={() => setDocsOpen(true)} />
+    <TopNavigation />
     <main>
-      <HeroSection onDocsClick={() => setDocsOpen(true)} />
+      <HeroSection />
       <ProductDemoSection />
       <EvidenceSection />
       <AgentMarketplace />
@@ -108,9 +88,8 @@ export default function App() {
       <ArchitectureSection />
       <CommunitySection />
       <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><p className="eyebrow">06 / Global infrastructure</p><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Current corpus scope is Vietnamese traffic, labor and tax/invoice law. The architecture can expand to more jurisdictions as local sources, languages and legal metadata are integrated; temporal metadata is not yet consistent across the current corpus.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
-      <FinalCallToAction onDocsClick={() => setDocsOpen(true)} />
+      <FinalCallToAction />
     </main>
     <SiteFooter />
-    <AnimatePresence>{docsOpen && <DocsDialog onClose={() => setDocsOpen(false)} />}</AnimatePresence>
   </div>;
 }
