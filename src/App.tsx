@@ -54,17 +54,9 @@ function ProductDemoSection() {
   </section>;
 }
 
-const endpoints = [
-  { path: '/domains/{traffic|labor|tax}/ask', detail: 'Cited answer from a domain agent' },
-  { path: '/paid/traffic/ask', detail: 'x402 pay-per-request · answer + receipt' },
-];
-
 function DeveloperSection() {
   return <section className="final-cta-section" id="developers"><div className="shell final-cta">
-    <div><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Two endpoints: ask any domain agent, or pay per request over x402.</p></div>
-    <ul className="endpoint-list" aria-label="API endpoints">
-      {endpoints.map((endpoint) => <li key={endpoint.path}><span className="api-method">POST</span><div><code>{endpoint.path}</code><span>{endpoint.detail}</span></div></li>)}
-    </ul>
+    <div><h2>Build on legal intelligence<br /><em>you can trace.</em></h2></div>
   </div></section>;
 }
 

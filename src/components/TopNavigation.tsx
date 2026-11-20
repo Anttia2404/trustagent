@@ -73,8 +73,8 @@ export function TopNavigation() {
 
         <div className="site-header__actions">
           <span className="header-status"><span className="status-dot" /> Infrastructure preview</span>
-          <ActionLink className="header-cta" href="#developers">
-            API <ArrowDown size={14} aria-hidden="true" />
+          <ActionLink className="header-cta" href="#product">
+            Trace an answer <ArrowDown size={14} aria-hidden="true" />
           </ActionLink>
           <button
             type="button"
@@ -93,8 +93,8 @@ export function TopNavigation() {
           {links.map((link) => (
             <a key={link.href} href={link.href} onClick={closeMenu} {...currentProps(link.href)}>{link.label}</a>
           ))}
-          <a href="#developers" onClick={closeMenu}>
-            API <ArrowDown size={15} aria-hidden="true" />
+          <a href="#product" onClick={closeMenu}>
+            Trace an answer <ArrowDown size={15} aria-hidden="true" />
           </a>
         </nav>
       )}
