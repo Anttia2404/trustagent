@@ -10,7 +10,6 @@ export function ArchitectureSection() {
         <Reveal>
           <div className="architecture-heading-row">
             <SectionHeading
-              eyebrow="BACKEND REQUEST PATH"
               title={<>Routing, retrieval<br /><span>and answer checks.</span></>}
               description="The current service routes a legal query to one of three domain agents, retrieves evidence, then checks citations and quantitative claims before responding."
             />

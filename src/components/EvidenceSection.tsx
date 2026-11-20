@@ -19,8 +19,6 @@ export function EvidenceSection() {
         <Reveal>
           <div className="evidence-heading-grid">
             <SectionHeading
-              index="02"
-              eyebrow="CITATIONS & PROVENANCE"
               title={<>Inspect the sources<br /><span>behind an answer.</span></>}
               description="The paid traffic endpoint can return a provenance receipt with an answer hash, citation references and index version. Effective-date metadata is uneven across the legal corpus."
             />
@@ -53,7 +51,6 @@ export function EvidenceSection() {
 
         <Reveal className="evidence-explorer-grid">
           <div className="evidence-copy">
-            <span className="mono-label">PROVENANCE RECEIPT</span>
             <h3>Trace what was returned.<br />Keep correctness separate.</h3>
             <p>When x402 is enabled, the paid traffic route creates a receipt with a timestamp, index version, answer SHA-256 and citation details. Citation text hashes are recorded when present.</p>
             <ul className="evidence-list">

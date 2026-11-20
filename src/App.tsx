@@ -16,7 +16,6 @@ function HeroSection() {
   return <section className="hero-section" id="top">
     <div className="shell hero-layout">
       <div className="hero-copy">
-        <p className="eyebrow"><span className="eyebrow-rule" /> Legal intelligence infrastructure <span className="eyebrow-location">Vietnam · built to travel</span></p>
         <h1>Legal answers,<br /><em>grounded in the law.</em></h1>
         <p className="hero-subtitle">TrustAgent helps people and AI agents find, understand, and verify Vietnamese legal information against its source.</p>
         <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><ActionLink variant="secondary" href={apiReadmeUrl} target="_blank" rel="noreferrer">API README <ArrowUpRight size={15} /></ActionLink></div>
@@ -40,7 +39,7 @@ function HeroSection() {
 function ProductDemoSection() {
   return <section className="product-demo-section" id="product">
     <div className="shell">
-      <div className="section-intro section-intro--wide"><p className="eyebrow">01 / Product walkthrough</p><h2>From a question<br />to its legal source.</h2><p>Follow a legal question through domain routing, hybrid retrieval and citation checks. This is an illustrative preview, not a live query.</p></div>
+      <div className="section-intro section-intro--wide"><h2>From a question<br />to its legal source.</h2><p>Follow a legal question through domain routing, hybrid retrieval and citation checks. This is an illustrative preview, not a live query.</p></div>
       <div className="product-workbench">
         <div className="workbench-rail"><span className="workbench-brand"><BrandMark size={28} /> TrustAgent</span><span className="workbench-rail__item is-current"><BookOpen size={16} /> Legal research</span><span className="workbench-rail__item"><Layers3 size={16} /> Source library</span><span className="workbench-rail__jurisdiction"><Globe2 size={15} /> Vietnam law</span></div>
         <div className="workbench-main">
@@ -65,7 +64,7 @@ function ProductDemoSection() {
 
 function FinalCallToAction() {
   return <section className="final-cta-section" id="developers"><div className="shell final-cta">
-    <div><p className="eyebrow">Infrastructure for people and agents</p><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Endpoints, setup and the optional paid traffic route are documented in the backend README.</p></div>
+    <div><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Endpoints, setup and the optional paid traffic route are documented in the backend README.</p></div>
     <div className="final-cta__actions"><ActionLink href={apiReadmeUrl} target="_blank" rel="noreferrer" className="hero-action-primary">Read the API README <ArrowUpRight size={15} /></ActionLink><ActionLink variant="secondary" href="#agents">Explore legal agents <ArrowRight size={15} /></ActionLink></div>
   </div></section>;
 }
@@ -82,12 +81,12 @@ export default function App() {
       <ProductDemoSection />
       <EvidenceSection />
       <AgentMarketplace />
-      <div className="infrastructure-intro" id="infrastructure"><div className="shell"><p className="eyebrow">04 / Agent infrastructure</p><h2>Trust signals and payment,<br /><em>with distinct jobs.</em></h2><p>ERC-8004 describes agent identity and trust signals; x402 handles HTTP payment. Neither protocol establishes that a legal answer is correct.</p></div></div>
+      <div className="infrastructure-intro" id="infrastructure"><div className="shell"><h2>Trust signals and payment,<br /><em>with distinct jobs.</em></h2><p>ERC-8004 describes agent identity and trust signals; x402 handles HTTP payment. Neither protocol establishes that a legal answer is correct.</p></div></div>
       <TrustRegistrySection />
       <PaymentSection />
       <ArchitectureSection />
       <CommunitySection />
-      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><p className="eyebrow">06 / Global infrastructure</p><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Current corpus scope is Vietnamese traffic, labor and tax/invoice law. The architecture can expand to more jurisdictions as local sources, languages and legal metadata are integrated; temporal metadata is not yet consistent across the current corpus.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
+      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Current corpus scope is Vietnamese traffic, labor and tax/invoice law. The architecture can expand to more jurisdictions as local sources, languages and legal metadata are integrated; temporal metadata is not yet consistent across the current corpus.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
       <FinalCallToAction />
     </main>
     <SiteFooter />

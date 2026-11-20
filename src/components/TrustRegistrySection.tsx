@@ -35,7 +35,7 @@ export function TrustRegistrySection() {
         <div className="split-heading">
           <Reveal>
             <SectionHeading
-              eyebrow="ERC-8004 · CONCEPTUAL TRUST LAYER"
+              level={3}
               title={<>Agent identity and reputation<br /><span>are different trust signals.</span></>}
               description="ERC-8004 defines identity, feedback and validation registries for agents. This section explains the standard; TrustAgent registry records are not connected here."
             />

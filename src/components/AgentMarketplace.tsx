@@ -42,12 +42,9 @@ export function AgentMarketplace() {
         <Reveal>
           <div className="marketplace-heading">
             <SectionHeading
-              index="03"
-              eyebrow="IMPLEMENTED BACKEND DOMAINS"
               title={<>Legal agents across<br /><span>three Vietnam domains.</span></>}
               description="The backend routes legal questions to traffic, labor and tax agents. Each uses hybrid retrieval and checks citations before returning an answer."
             />
-            <div className="marketplace-count"><span>03</span><small>SUPPORTED<br />DOMAINS</small></div>
           </div>
         </Reveal>
 

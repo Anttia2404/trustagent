@@ -36,7 +36,7 @@ export function PaymentSection() {
         <Reveal>
           <div className="payment-heading-grid">
             <SectionHeading
-              eyebrow="x402 · OPTIONAL PAID TRAFFIC ROUTE"
+              level={3}
               title={<>Pay per request on<br /><span>the traffic-law API.</span></>}
               description="When enabled and configured, x402 middleware protects POST /paid/traffic/ask. Payment is separate from retrieval, answer generation and agent identity."
             />

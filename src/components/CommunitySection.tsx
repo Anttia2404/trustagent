@@ -10,8 +10,6 @@ export function CommunitySection() {
         <Reveal>
           <div className="community-heading-grid">
             <SectionHeading
-              index="05"
-              eyebrow="COMMUNITY CONTRIBUTION"
               title={<>Help improve legal intelligence.<br /><span>Get rewarded for verified contributions.</span></>}
               description="A stronger legal knowledge base starts with people who know the source, spot the change and help verify what comes next."
             />
@@ -25,7 +23,7 @@ export function CommunitySection() {
             return (
               <Reveal key={item.id} delay={index * 0.05}>
                 <article className="contribution-card">
-                  <div className="contribution-card__top"><span>{item.number}</span><div className="contribution-card__icon"><Icon size={18} /></div></div>
+                  <div className="contribution-card__top"><div className="contribution-card__icon"><Icon size={18} /></div></div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
                   <div className="contribution-card__tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
@@ -37,7 +35,7 @@ export function CommunitySection() {
 
         <Reveal className="reward-flow-card">
           <div className="reward-flow-card__header">
-            <div><span className="mono-label">REVIEW-GATED REWARD FLOW</span><h3>Contribution in. Verified value out.</h3></div>
+            <div><h3>Contribution in. Verified value out.</h3></div>
             <div className="reward-flow-card__pill"><BadgeCheck size={14} /> Human approval required</div>
           </div>
           <div className="reward-flow">

@@ -1,5 +1,4 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { cva } from 'class-variance-authority';
 import { cn } from '../lib/utils';
 
@@ -79,40 +78,26 @@ export function Surface({ className, ...props }: HTMLAttributes<HTMLDivElement>)
   return <div className={cn('surface relative rounded-2xl border border-white/[.085] bg-[#0c100e]/90', className)} {...props} />;
 }
 
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('eyebrow', className)}>{children}</div>;
-}
-
+/**
+ * Section title block. `level={3}` marks a sub-section that sits under a chapter
+ * intro (e.g. the ERC-8004 and x402 parts of the infrastructure chapter).
+ */
 export function SectionHeading({
-  index,
-  eyebrow,
   title,
   description,
+  level = 2,
   className,
 }: {
-  index?: string;
-  eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
+  level?: 2 | 3;
   className?: string;
 }) {
+  const Heading = level === 2 ? 'h2' : 'h3';
   return (
-    <div className={cn('section-heading', className)}>
-      <div className="section-heading__meta">
-        {index && <span className="section-index">{index}</span>}
-        <span className="section-heading__eyebrow">{eyebrow}</span>
-      </div>
-      <h2>{title}</h2>
+    <div className={cn('section-heading', level === 3 && 'section-heading--sub', className)}>
+      <Heading>{title}</Heading>
       {description && <p>{description}</p>}
     </div>
-  );
-}
-
-export function ArrowLink({ children, href, className }: { children: ReactNode; href: string; className?: string }) {
-  return (
-    <a href={href} className={cn('arrow-link', className)}>
-      {children}
-      <ArrowUpRight size={15} aria-hidden="true" />
-    </a>
   );
 }
