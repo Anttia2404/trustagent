@@ -14,7 +14,7 @@ function AgentDialog({ agent, onClose }: { agent: LegalAgent; onClose: () => voi
       <div ref={dialogRef} tabIndex={-1} className="agent-dialog" role="dialog" aria-modal="true" aria-labelledby="agent-dialog-title">
         <button ref={closeButtonRef} className="dialog-close" type="button" onClick={onClose} aria-label="Close details"><X size={18} /></button>
         <div className={`agent-icon agent-icon--${agent.accent}`}><Icon size={20} /></div>
-        <Badge tone={agent.status === 'IMPLEMENTED' ? 'green' : 'neutral'}>{agent.status === 'IMPLEMENTED' ? 'IMPLEMENTED · BACKEND' : 'ROADMAP'}</Badge>
+        <Badge tone={agent.status === 'IMPLEMENTED' ? 'green' : 'neutral'}>{agent.status === 'IMPLEMENTED' ? 'Implemented' : 'Roadmap'}</Badge>
         <h3 id="agent-dialog-title">{agent.name}</h3>
         <p>{agent.specialty}</p>
         <div className="dialog-details">
@@ -27,7 +27,7 @@ function AgentDialog({ agent, onClose }: { agent: LegalAgent; onClose: () => voi
           <span className="mono-label">IMPLEMENTED PIPELINE</span>
           <div>{agent.capabilities.map((capability) => <span key={capability}>{capability}</span>)}</div>
         </div>
-        <p className="dialog-disclaimer">This landing-page panel is illustrative. API availability depends on the backend deployment and its configuration.</p>
+        <p className="dialog-disclaimer">API availability depends on the backend deployment and its configuration.</p>
       </div>
     </div>
   );
@@ -57,7 +57,7 @@ export function AgentMarketplace() {
                 <article className={`agent-card ${isImplemented ? 'agent-card--implemented' : ''}`}>
                   <div className="agent-card__top">
                     <div className={`agent-icon agent-icon--${agent.accent}`}><Icon size={20} /></div>
-                    <Badge tone={isImplemented ? 'green' : 'neutral'}>{isImplemented ? 'IMPLEMENTED' : 'ROADMAP'}</Badge>
+                    <Badge tone={isImplemented ? 'green' : 'neutral'}>{isImplemented ? 'Implemented' : 'Roadmap'}</Badge>
                   </div>
                   <h3>{agent.name}</h3>
                   <p className="agent-card__specialty">{agent.specialty}</p>

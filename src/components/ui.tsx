@@ -55,20 +55,9 @@ export function Badge({
   children,
   tone = 'neutral',
   ...props
-}: HTMLAttributes<HTMLSpanElement> & { tone?: 'neutral' | 'green' | 'blue' | 'amber' | 'red' }) {
+}: HTMLAttributes<HTMLSpanElement> & { tone?: 'neutral' | 'green' | 'blue' | 'amber' }) {
   return (
-    <span
-      className={cn(
-        'badge inline-flex items-center gap-1.5 border px-2.5 py-1 font-mono text-[10px] font-medium',
-        tone === 'neutral' && 'border-white/10 bg-white/[.035] text-[#a5aea9]',
-        tone === 'green' && 'border-[#b7f77a]/20 bg-[#b7f77a]/[.08] text-[#c8ff9b]',
-        tone === 'blue' && 'border-sky-300/20 bg-sky-300/[.08] text-sky-200',
-        tone === 'amber' && 'border-amber-300/20 bg-amber-300/[.08] text-amber-100',
-        tone === 'red' && 'border-rose-300/20 bg-rose-300/[.08] text-rose-200',
-        className,
-      )}
-      {...props}
-    >
+    <span className={cn('badge', `badge--${tone}`, className)} {...props}>
       {children}
     </span>
   );

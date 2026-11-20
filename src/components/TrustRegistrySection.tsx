@@ -50,7 +50,7 @@ export function TrustRegistrySection() {
         <Reveal className="registry-shell">
           <div className="registry-console">
             <div className="registry-console__rail">
-              <div className="console-label"><span className="console-label__icon"><Fingerprint size={15} /></span> Registry explorer <Badge tone="neutral">DEMO</Badge></div>
+              <div className="console-label"><span className="console-label__icon"><Fingerprint size={15} /></span> Registry explorer <Badge tone="amber">Illustrative</Badge></div>
               <p className="console-intro">A trust stack with distinct signals — not a single trust score.</p>
               <div className="registry-tabs" role="tablist" aria-label="ERC-8004 registry">
                 {registryTabs.map((tab) => {
@@ -85,7 +85,6 @@ export function TrustRegistrySection() {
             <div className="registry-console__main" role="tabpanel" id="registry-panel" aria-labelledby={`registry-tab-${activeRegistry.id}`} tabIndex={0}>
               <div className="registry-panel-top">
                 <span className="mono-label">{activeRegistry.tag}</span>
-                <Badge tone="amber">Illustrative · not connected</Badge>
               </div>
               <AnimatePresence mode="wait">
                 <motion.div
@@ -100,9 +99,8 @@ export function TrustRegistrySection() {
                     <div className="registry-agent-icon"><ActiveIcon size={20} /></div>
                     <div>
                       <div className="registry-agent-head__title">{activeRegistry.title}</div>
-                      <div className="registry-agent-head__sub">Traffic Law Agent <span className="bullet-divider">·</span> Demo profile</div>
+                      <div className="registry-agent-head__sub">Traffic Law Agent</div>
                     </div>
-                    <span className="registry-demo-indicator"><span /> DEMO</span>
                   </div>
                   <p className="registry-description">{activeRegistry.body}</p>
 
@@ -125,7 +123,7 @@ export function TrustRegistrySection() {
           </div>
 
           <div className="trust-flow">
-            <div className="trust-flow__caption"><span className="flow-live-dot" /> TRUST LIFECYCLE <span className="trust-flow__caption-muted">Illustrative sequence</span></div>
+            <div className="trust-flow__caption">Trust lifecycle</div>
             <div className="trust-flow__steps">
               {flow.map((step, index) => (
                 <div className="trust-flow__item" key={step}>

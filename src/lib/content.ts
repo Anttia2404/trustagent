@@ -42,10 +42,10 @@ export const registryTabs = [
     body: 'Every participating agent can expose a portable on-chain identity, its declared capabilities and service endpoints for other agents to discover.',
     fields: [
       ['Agent', 'Traffic Law Agent'],
-      ['Registration status', 'Not registered · illustrative'],
-      ['Agent ID', 'Illustrative profile · unregistered'],
+      ['Registration status', 'Not registered'],
+      ['Agent ID', 'Not assigned'],
       ['Capabilities', 'Vietnamese traffic law · cited answers'],
-      ['Service endpoint', 'Not connected · illustrative'],
+      ['Service endpoint', 'Not connected'],
     ],
   },
   {
@@ -64,7 +64,7 @@ export const registryTabs = [
     title: 'Independent review, separately recorded.',
     body: 'A validator can inspect an agent’s work against its evidence reference and submit a validation result distinct from ordinary client feedback.',
     fields: [
-      ['Validation request', 'Illustrative · not submitted'],
+      ['Validation request', 'Not submitted'],
       ['Evidence reference', 'Not connected'],
       ['Validator result', 'Pending independent review'],
       ['Reputation effect', 'Not recorded'],

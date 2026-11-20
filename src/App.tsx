@@ -39,11 +39,11 @@ function HeroSection() {
 function ProductDemoSection() {
   return <section className="product-demo-section" id="product">
     <div className="shell">
-      <div className="section-intro section-intro--wide"><h2>From a question<br />to its legal source.</h2><p>Follow a legal question through domain routing, hybrid retrieval and citation checks. This is an illustrative preview, not a live query.</p></div>
+      <div className="section-intro section-intro--wide"><h2>From a question<br />to its legal source.</h2><p>Follow a legal question through domain routing, hybrid retrieval and citation checks.</p></div>
       <div className="product-workbench">
         <div className="workbench-rail"><span className="workbench-brand"><BrandMark size={28} /> TrustAgent</span><span className="workbench-rail__item is-current"><BookOpen size={16} /> Legal research</span><span className="workbench-rail__item"><Layers3 size={16} /> Source library</span><span className="workbench-rail__jurisdiction"><Globe2 size={15} /> Vietnam law</span></div>
         <div className="workbench-main">
-          <div className="workbench-topline"><span>Legal research <span>/</span> Traffic law</span><span className="preview-state">Illustrative preview</span></div>
+          <div className="workbench-topline"><span>Legal research <span>/</span> Traffic law</span><span className="preview-state">Illustrative · not a live query</span></div>
           <div className="question-block"><span className="workbench-label">Your question</span><p>Do motorcycle riders and passengers both need to wear a helmet?</p></div>
           <div className="research-path" aria-label="Research path: question, source, provision, answer">
             <div><span>01</span><strong>Question</strong></div><i /><div><span>02</span><strong>Source</strong></div><i /><div><span>03</span><strong>Provision</strong></div><i /><div><span>04</span><strong>Answer</strong></div>
@@ -53,7 +53,7 @@ function ProductDemoSection() {
           </div>
           <div className="retrieved-document"><div className="retrieved-document__icon"><FileText size={19} /></div><div className="retrieved-document__text"><strong>Law on Road Traffic Order and Safety</strong><span>Law No. 36/2024/QH15 <b>·</b> In force 1 Jan 2025</span></div><span className="source-status"><Check size={13} /> Source</span></div>
           <div className="workbench-result"><div className="workbench-result__header"><span><ShieldCheck size={15} /> Cited answer</span><span>Vietnamese</span></div><p>Both the motorcycle driver and passengers must wear a helmet that meets national technical standards and fasten it correctly.</p><a href={lawSource} target="_blank" rel="noreferrer"><span>Article 33(2)</span> Open source text <ArrowUpRight size={14} /></a></div>
-          <p className="workbench-disclaimer">Illustrative preview · informational assistance only · not a substitute for professional legal advice.</p>
+          <p className="workbench-disclaimer">Informational assistance only · not a substitute for professional legal advice.</p>
         </div>
         <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div><ArrowUpRight size={15} /></div><div className="source-detail"><span>Jurisdiction</span><strong>Vietnam</strong></div><div className="source-detail"><span>Effective date</span><strong>01 Jan 2025</strong></div><div className="source-detail"><span>Reference</span><strong>Article 33(2)</strong></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
       </div>

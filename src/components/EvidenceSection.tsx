@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, Check, CircleHelp, FileCheck2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Check, CircleHelp, FileCheck2, ShieldCheck } from 'lucide-react';
 import { evidenceSteps } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -20,7 +20,7 @@ export function EvidenceSection() {
           <div className="evidence-heading-grid">
             <SectionHeading
               title={<>Inspect the sources<br /><span>behind an answer.</span></>}
-              description="The paid traffic endpoint can return a provenance receipt with an answer hash, citation references and index version. Effective-date metadata is uneven across the legal corpus."
+              description="The paid traffic endpoint can return a provenance receipt with an answer hash, citation references and index version."
             />
             <div className="evidence-principle">
               <div className="evidence-principle__icon"><FileCheck2 size={18} /></div>
@@ -30,7 +30,7 @@ export function EvidenceSection() {
         </Reveal>
 
         <Reveal className="evidence-pipeline-wrap">
-          <div className="pipeline-header"><span className="mono-label">PAID TRAFFIC RECEIPT FLOW</span><Badge tone="amber">RECEIPT ONLY WHEN X402 IS ENABLED</Badge></div>
+          <div className="pipeline-header"><span className="mono-label">PAID TRAFFIC RECEIPT FLOW</span><Badge tone="amber">Only when x402 is enabled</Badge></div>
           <div className="evidence-pipeline">
             {evidenceSteps.map((step, index) => {
               const Icon = step.icon;
@@ -46,7 +46,6 @@ export function EvidenceSection() {
               );
             })}
           </div>
-          <div className="pipeline-caption"><span className="pipeline-caption__line" /> Receipt verification checks integrity, not the legal correctness of an answer <ArrowDown size={13} /></div>
         </Reveal>
 
         <Reveal className="evidence-explorer-grid">
@@ -65,17 +64,17 @@ export function EvidenceSection() {
             <div className="explorer-topbar">
               <div className="explorer-window-dots"><i /><i /><i /></div>
               <span>Evidence explorer</span>
-              <Badge tone="amber">ILLUSTRATIVE UI</Badge>
+              <Badge tone="amber">Illustrative</Badge>
             </div>
-            <div className="explorer-status"><span><CircleHelp size={15} /> No backend receipt loaded</span><span className="explorer-status__badge">DEMO</span></div>
+            <div className="explorer-status"><span><CircleHelp size={15} /> No backend receipt loaded</span></div>
             <div className="explorer-fields">
               {fields.map(([label, value]) => <div className="explorer-field" key={label}><span>{label}</span><strong>{value}</strong></div>)}
             </div>
-            <div className="explorer-verification"><div className="explorer-verification__icon"><ShieldCheck size={16} /></div><div><strong>Integrity verification</strong><span>Illustrative · no receipt loaded</span></div><Badge tone="neutral">NOT RUN</Badge></div>
+            <div className="explorer-verification"><div className="explorer-verification__icon"><ShieldCheck size={16} /></div><div><strong>Integrity verification</strong><span>Runs once a receipt is loaded</span></div><Badge tone="neutral">Not run</Badge></div>
           </div>
         </Reveal>
 
-        <div className="evidence-caveat"><ShieldCheck size={15} /><span>A valid hash or Merkle proof only shows that recorded data matches the receipt; it does not validate legal reasoning. Effective-date metadata is incomplete, and a document status of unknown does not confirm that it is currently in force.</span></div>
+        <div className="evidence-caveat"><ShieldCheck size={15} /><span>Effective-date metadata is uneven across the corpus: a document whose status is unknown is not confirmed to be in force.</span></div>
       </div>
     </section>
   );

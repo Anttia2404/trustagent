@@ -13,7 +13,7 @@ export function CommunitySection() {
               title={<>Help improve legal intelligence.<br /><span>Get rewarded for verified contributions.</span></>}
               description="A stronger legal knowledge base starts with people who know the source, spot the change and help verify what comes next."
             />
-            <div className="reward-status-card"><div className="reward-status-card__icon"><CircleDollarSign size={19} /></div><div><Badge tone="amber">PLANNED · EXPERIMENTAL</Badge><p>Rewards are a future design concept, subject to review and approval.</p></div></div>
+            <div className="reward-status-card"><div className="reward-status-card__icon"><CircleDollarSign size={19} /></div><div><Badge tone="amber">Planned</Badge><p>Rewards are a future concept, possibly platform tokens or USDC. No token, payout or exchange rate is specified.</p></div></div>
           </div>
         </Reveal>
 
@@ -54,7 +54,6 @@ export function CommunitySection() {
           </div>
         </Reveal>
 
-        <div className="community-reward-note"><span className="reward-note-dot" /> Potential rewards may be platform tokens or USDC in a future design. No token name, payout, exchange rate or tokenomics are specified.</div>
       </div>
     </section>
   );

@@ -13,7 +13,7 @@ export function ArchitectureSection() {
               title={<>Routing, retrieval<br /><span>and answer checks.</span></>}
               description="The current service routes a legal query to one of three domain agents, retrieves evidence, then checks citations and quantitative claims before responding."
             />
-            <div className="architecture-key"><span><i className="architecture-key__line" /> Request flow</span><Badge tone="neutral">CURRENT BACKEND</Badge></div>
+            <div className="architecture-key"><span><i className="architecture-key__line" /> Request flow</span><Badge tone="green">Current backend</Badge></div>
           </div>
         </Reveal>
 
