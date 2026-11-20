@@ -26,13 +26,12 @@ function HeroSection() {
           <div className="answer-sheet__masthead"><span>TrustAgent <i>Legal answer</i></span><span className="document-id">VIETNAM · TRAFFIC</span></div>
           <p className="answer-sheet__label">A question about Vietnamese traffic law</p>
           <h2>Do motorcycle riders and passengers both need to wear a helmet?</h2>
-          <div className="answer-sheet__answer"><span className="answer-sheet__answer-label">Short answer</span><p>Yes. The law requires both the driver and passengers on motorcycles and mopeds to wear helmets that meet national technical standards and to fasten the chin strap correctly.</p></div>
+          <div className="answer-sheet__answer"><span className="answer-sheet__answer-label">Short answer</span><p>Yes. Rider and passenger must both wear a standard helmet with the chin strap fastened.</p></div>
           <a className="law-citation" href={lawSource} target="_blank" rel="noreferrer"><span className="law-citation__mark">§</span><span><strong>Article 33(2)</strong><small>Law No. 36/2024/QH15 · effective 1 Jan 2025</small></span><ArrowUpRight size={15} /></a>
           <div className="answer-sheet__foot"><span><FileCheck2 size={15} /> Source linked · illustrative preview</span><span>Vietnam</span></div>
         </article>
       </div>
     </div>
-    <div className="shell hero-bottomline"><span>Built for legal work today</span><span className="hero-bottomline__divider" /><span>Designed for agent workflows</span><a href="#product">Explore the product <ArrowRight size={14} /></a></div>
   </section>;
 }
 
@@ -48,16 +47,12 @@ function ProductDemoSection() {
           <div className="research-path" aria-label="Research path: question, source, provision, answer">
             <div><span>01</span><strong>Question</strong></div><i /><div><span>02</span><strong>Source</strong></div><i /><div><span>03</span><strong>Provision</strong></div><i /><div><span>04</span><strong>Answer</strong></div>
           </div>
-          <div className="retrieval-methods" aria-label="Retrieval implementation">
-            <span>Metadata query plan</span><i /><span>Chroma + BM25 · RRF</span><i /><span>Parent context</span><i /><span>Optional reranker · off by default</span>
-          </div>
           <div className="retrieved-document"><div className="retrieved-document__icon"><FileText size={19} /></div><div className="retrieved-document__text"><strong>Law on Road Traffic Order and Safety</strong><span>Law No. 36/2024/QH15 <b>·</b> In force 1 Jan 2025</span></div><span className="source-status"><Check size={13} /> Source</span></div>
           <div className="workbench-result"><div className="workbench-result__header"><span><ShieldCheck size={15} /> Cited answer</span><span>Vietnamese</span></div><p>Both the motorcycle driver and passengers must wear a helmet that meets national technical standards and fasten it correctly.</p><a href={lawSource} target="_blank" rel="noreferrer"><span>Article 33(2)</span> Open source text <ArrowUpRight size={14} /></a></div>
           <p className="workbench-disclaimer">Informational assistance only · not a substitute for professional legal advice.</p>
         </div>
-        <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div></div><div className="source-detail"><span>Jurisdiction</span><strong>Vietnam</strong></div><div className="source-detail"><span>Effective date</span><strong>01 Jan 2025</strong></div><div className="source-detail"><span>Reference</span><strong>Article 33(2)</strong></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
+        <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
       </div>
-      <div className="product-demo-caption"><span>Question</span><i /><span>Retrieved document</span><i /><span>Relevant provision</span><i /><span>Cited answer</span></div>
     </div>
   </section>;
 }
@@ -86,7 +81,7 @@ export default function App() {
       <PaymentSection />
       <ArchitectureSection />
       <CommunitySection />
-      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Current corpus scope is Vietnamese traffic, labor and tax/invoice law. The architecture can expand to more jurisdictions as local sources, languages and legal metadata are integrated; temporal metadata is not yet consistent across the current corpus.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
+      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Today: Vietnamese traffic, labor and tax law. New jurisdictions need local sources, language support and legal metadata.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
       <FinalCallToAction />
     </main>
     <SiteFooter />

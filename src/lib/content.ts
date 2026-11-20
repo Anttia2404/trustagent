@@ -95,17 +95,17 @@ export const paymentSteps = [
 export const contributionTypes = [
   {
     id: 'documents', title: 'Submit legal documents', icon: FileText,
-    description: 'Share new laws, amendments or updated versions. Source, metadata and validity are checked before anything enters the knowledge pipeline.',
+    description: 'Share new laws or amendments. Source and validity are checked first.',
     tags: ['Source check', 'Version history'],
   },
   {
     id: 'reports', title: 'Report an answer', icon: FileSearch,
-    description: 'Flag a potentially incorrect answer with its question, answer reference and relevant legal source. A reviewer verifies it before the knowledge base changes.',
+    description: 'Flag a wrong answer with its legal source. A reviewer checks it.',
     tags: ['Evidence required', 'Reviewer-led'],
   },
   {
     id: 'review', title: 'Review & validate', icon: ShieldCheck,
-    description: 'Qualified reviewers check document authenticity, legal references and proposed corrections, then record accepted decisions with an audit trail.',
+    description: 'Reviewers verify documents and corrections, with an audit trail.',
     tags: ['Human review', 'Auditable'],
   },
 ] as const;

@@ -1,6 +1,6 @@
 import { useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ExternalLink, Fingerprint, MessageSquareText, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ExternalLink, Fingerprint } from 'lucide-react';
 import { registryTabs } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -37,7 +37,7 @@ export function TrustRegistrySection() {
             <SectionHeading
               level={3}
               title={<>Agent identity and reputation<br /><span>are different trust signals.</span></>}
-              description="ERC-8004 defines identity, feedback and validation registries for agents. This section explains the standard; TrustAgent registry records are not connected here."
+              description="ERC-8004 gives agents separate identity, feedback and validation records. TrustAgent is not connected to them yet."
             />
           </Reveal>
           <Reveal delay={0.08}>
@@ -51,7 +51,6 @@ export function TrustRegistrySection() {
           <div className="registry-console">
             <div className="registry-console__rail">
               <div className="console-label"><span className="console-label__icon"><Fingerprint size={15} /></span> Registry explorer <Badge tone="amber">Illustrative</Badge></div>
-              <p className="console-intro">A trust stack with distinct signals — not a single trust score.</p>
               <div className="registry-tabs" role="tablist" aria-label="ERC-8004 registry">
                 {registryTabs.map((tab) => {
                   const Icon = tab.icon;
@@ -75,10 +74,6 @@ export function TrustRegistrySection() {
                     </button>
                   );
                 })}
-              </div>
-              <div className="registry-note">
-                <div className="registry-note__icon"><MessageSquareText size={15} /></div>
-                <p><strong>Three signals. Separate meanings.</strong><br />Registration establishes an identity — it does not guarantee trust or legal correctness.</p>
               </div>
             </div>
 
@@ -111,11 +106,6 @@ export function TrustRegistrySection() {
                         <span>{value}</span>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="registry-footnote">
-                    <ShieldCheck size={15} />
-                    <span>Identity, user feedback and independent validation remain distinct records.</span>
                   </div>
                 </motion.div>
               </AnimatePresence>

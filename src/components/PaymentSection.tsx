@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useReducedMotion } from 'framer-motion';
-import { Activity, Check, CircleDollarSign, Code2, FileCheck2, Play, ShieldCheck, WalletCards } from 'lucide-react';
+import { Activity, Check, CircleDollarSign, Code2, FileCheck2, Play, ShieldCheck } from 'lucide-react';
 import { paymentSteps } from '../lib/content';
 import { Badge, Button, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -38,13 +38,8 @@ export function PaymentSection() {
             <SectionHeading
               level={3}
               title={<>Pay per request on<br /><span>the traffic-law API.</span></>}
-              description="When enabled and configured, x402 middleware protects POST /paid/traffic/ask. Payment is separate from retrieval, answer generation and agent identity."
+              description="Optional x402 middleware charges per request on POST /paid/traffic/ask."
             />
-            <div className="protocol-distinction">
-              <div><span className="protocol-distinction__mark protocol-distinction__mark--payment">402</span><div><strong>x402</strong><span>Payment protocol</span></div></div>
-              <div className="protocol-distinction__divider" />
-              <div><span className="protocol-distinction__mark protocol-distinction__mark--identity"><ShieldCheck size={18} /></span><div><strong>ERC-8004</strong><span>Identity · discovery · trust signals</span></div></div>
-            </div>
           </div>
         </Reveal>
 
@@ -82,12 +77,10 @@ export function PaymentSection() {
               <div className="api-response-card__header"><span className="mono-label">RESPONSE PREVIEW</span><Badge tone="green"><span className="status-dot status-dot--small" /> Answer + receipt</Badge></div>
               <div className="response-document-icon"><FileCheck2 size={19} /></div>
               <h3>Vietnamese traffic regulations</h3>
-              <p>The paid route returns an answer, legal citations and a provenance receipt when x402 is enabled.</p>
               <div className="citation-preview"><span className="citation-preview__mark">§</span><div><strong>Legal citation</strong><span>Article 33(2)</span></div></div>
               <div className="receipt-preview"><div className="receipt-preview__icon"><ShieldCheck size={15} /></div><div><strong>Provenance receipt</strong><span>Returned by the paid route</span></div></div>
             </div>
           </div>
-          <div className="payment-note"><WalletCards size={15} /> x402 represents the payment handshake. Agent identity and independent trust signals belong to ERC-8004.</div>
         </Reveal>
       </div>
     </section>

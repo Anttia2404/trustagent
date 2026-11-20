@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeCheck, CircleDollarSign, FileCheck2, History, ShieldAlert } from 'lucide-react';
+import { ArrowRight, BadgeCheck, CircleDollarSign } from 'lucide-react';
 import { contributionTypes, rewardSteps } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -11,7 +11,7 @@ export function CommunitySection() {
           <div className="community-heading-grid">
             <SectionHeading
               title={<>Help improve legal intelligence.<br /><span>Get rewarded for verified contributions.</span></>}
-              description="A stronger legal knowledge base starts with people who know the source, spot the change and help verify what comes next."
+              description="People who know the law help keep the corpus current."
             />
             <div className="reward-status-card"><div className="reward-status-card__icon"><CircleDollarSign size={19} /></div><div><Badge tone="amber">Planned</Badge><p>Rewards are a future concept, possibly platform tokens or USDC. No token, payout or exchange rate is specified.</p></div></div>
           </div>
@@ -46,11 +46,6 @@ export function CommunitySection() {
                 {index < rewardSteps.length - 1 && <ArrowRight className="reward-flow__arrow" size={14} />}
               </div>
             ))}
-          </div>
-          <div className="community-safeguards">
-            <div><ShieldAlert size={15} /><span>Spam & duplicate checks</span></div>
-            <div><FileCheck2 size={15} /><span>Reviewer approval before rewards</span></div>
-            <div><History size={15} /><span>Accepted & rejected history</span></div>
           </div>
         </Reveal>
 

@@ -67,7 +67,6 @@ export function AgentMarketplace() {
                   <div className="agent-card__meta">
                     <div className="agent-meta-row"><span><Fingerprint size={13} /> Public domain</span><strong>{agent.domain}</strong></div>
                     <div className="agent-meta-row"><span><Database size={13} /> Chroma collection</span><strong>{agent.collection}</strong></div>
-                    <div className="agent-meta-row"><span><ShieldCheck size={13} /> Citation checks</span><strong>Implemented</strong></div>
                   </div>
                   <button type="button" className="agent-card__action" onClick={() => setSelected(agent)} aria-haspopup="dialog" aria-label={`View ${agent.name} details`}>
                     View details <ArrowRight size={15} aria-hidden="true" />
@@ -78,7 +77,7 @@ export function AgentMarketplace() {
           })}
         </div>
 
-        <div className="marketplace-footnote"><ShieldCheck size={15} /> Tax data covers tax and invoices; the internal `legal_accounting` collection is not a complete independent accounting corpus. ERC-8004 identity records are not connected.</div>
+        <div className="marketplace-footnote"><ShieldCheck size={15} /> The tax agent covers tax and invoice law, not full accounting.</div>
       </div>
       {selected && <AgentDialog agent={selected} onClose={() => setSelected(null)} />}
     </section>

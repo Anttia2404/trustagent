@@ -11,7 +11,7 @@ export function ArchitectureSection() {
           <div className="architecture-heading-row">
             <SectionHeading
               title={<>Routing, retrieval<br /><span>and answer checks.</span></>}
-              description="The current service routes a legal query to one of three domain agents, retrieves evidence, then checks citations and quantitative claims before responding."
+              description="Each query goes to one of three domain agents, which retrieve evidence and check citations before answering."
             />
             <div className="architecture-key"><span><i className="architecture-key__line" /> Request flow</span><Badge tone="green">Current backend</Badge></div>
           </div>
@@ -38,7 +38,6 @@ export function ArchitectureSection() {
               );
             })}
           </div>
-          <div className="architecture-map__footer"><span>Conversation store: SQLite or PostgreSQL · LangGraph checkpoint: SQLite.</span><span>Paid traffic endpoint uses x402 only when configured.</span></div>
         </Reveal>
       </div>
     </section>

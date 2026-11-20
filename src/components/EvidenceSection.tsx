@@ -1,4 +1,4 @@
-import { ArrowRight, Check, CircleHelp, FileCheck2, ShieldCheck } from 'lucide-react';
+import { ArrowRight, CircleHelp, FileCheck2, ShieldCheck } from 'lucide-react';
 import { evidenceSteps } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -20,7 +20,7 @@ export function EvidenceSection() {
           <div className="evidence-heading-grid">
             <SectionHeading
               title={<>Inspect the sources<br /><span>behind an answer.</span></>}
-              description="The paid traffic endpoint can return a provenance receipt with an answer hash, citation references and index version."
+              description="Paid answers can include a receipt: answer hash, cited sources and index version."
             />
             <div className="evidence-principle">
               <div className="evidence-principle__icon"><FileCheck2 size={18} /></div>
@@ -51,13 +51,7 @@ export function EvidenceSection() {
         <Reveal className="evidence-explorer-grid">
           <div className="evidence-copy">
             <h3>Trace what was returned.<br />Keep correctness separate.</h3>
-            <p>When x402 is enabled, the paid traffic route creates a receipt with a timestamp, index version, answer SHA-256 and citation details. Citation text hashes are recorded when present.</p>
-            <ul className="evidence-list">
-              <li><Check size={15} /> Receipt ID, timestamp and configured index version</li>
-              <li><Check size={15} /> Answer hash and cited source references</li>
-              <li><Check size={15} /> Evidence text hash when available</li>
-              <li><Check size={15} /> Optional Merkle batch proof</li>
-            </ul>
+            <p>A receipt records what was returned and which sources it cited, so the record can be checked later.</p>
           </div>
 
           <div className="evidence-explorer">
