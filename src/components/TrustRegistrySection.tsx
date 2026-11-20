@@ -1,20 +1,33 @@
-import { useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Fingerprint } from 'lucide-react';
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { registryTabs } from '../lib/content';
-import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
 
-const flow = ['Agent registration', 'Agent discovery', 'API request', 'User feedback', 'Validation', 'Reputation updates'];
-
 type RegistryId = (typeof registryTabs)[number]['id'];
+const REGISTRY_DURATION = 6500;
 
 export function TrustRegistrySection() {
   const [active, setActive] = useState<RegistryId>('identity');
+  const [focused, setFocused] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const visible = useInView(sectionRef, { amount: 0.15 });
   const reduceMotion = useReducedMotion();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeRegistry = registryTabs.find((item) => item.id === active) ?? registryTabs[0];
   const ActiveIcon = activeRegistry.icon;
+  const autoPlaying = visible && !reduceMotion && !focused;
+
+  useEffect(() => {
+    if (!autoPlaying) return;
+    const timer = window.setTimeout(() => {
+      setActive((current) => {
+        const index = registryTabs.findIndex((item) => item.id === current);
+        return registryTabs[(index + 1) % registryTabs.length].id;
+      });
+    }, REGISTRY_DURATION);
+    return () => window.clearTimeout(timer);
+  }, [active, autoPlaying]);
 
   const handleTabKeyDown = (event: ReactKeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
     let nextIndex: number | null = null;
@@ -30,52 +43,62 @@ export function TrustRegistrySection() {
   };
 
   return (
-    <section className="section section--trust" id="trust">
+    <section ref={sectionRef} className="section section--trust" id="infrastructure" aria-labelledby="trust-heading"
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+      }}
+    >
       <div className="shell">
-        <div className="split-heading">
-          <Reveal>
-            <SectionHeading
-              level={3}
-              title={<>Agent identity and reputation<br /><span>are different trust signals.</span></>}
-              description="Identity, feedback and validation are separate ERC-8004 records. TrustAgent is not connected to them yet."
-            />
-          </Reveal>
-        </div>
-
         <Reveal className="registry-shell">
-          <div className="registry-console">
+          <h2 className="registry-title" id="trust-heading">ERC-8004</h2>
+          <div className="registry-console" id="trust" data-ui>
             <div className="registry-console__rail">
-              <div className="console-label"><span className="console-label__icon"><Fingerprint size={15} /></span> Registry explorer <Badge tone="amber">Illustrative</Badge></div>
-              <div className="registry-tabs" role="tablist" aria-label="ERC-8004 registry">
-                {registryTabs.map((tab) => {
+              <div className="registry-tabs" role="tablist" aria-label="Sổ đăng ký ERC-8004">
+                {registryTabs.map((tab, idx) => {
                   const Icon = tab.icon;
+                  const isActive = active === tab.id;
                   return (
                     <button
                       key={tab.id}
-                      ref={(element) => { tabRefs.current[registryTabs.indexOf(tab)] = element; }}
+                      ref={(element) => { tabRefs.current[idx] = element; }}
                       type="button"
                       role="tab"
                       id={`registry-tab-${tab.id}`}
-                      aria-selected={active === tab.id}
+                      aria-selected={isActive}
                       aria-controls="registry-panel"
-                      tabIndex={active === tab.id ? 0 : -1}
-                      className={`registry-tab ${active === tab.id ? 'is-active' : ''}`}
+                      tabIndex={isActive ? 0 : -1}
+                      className={`registry-tab ${isActive ? 'is-active' : ''}`}
                       onClick={() => setActive(tab.id)}
-                      onKeyDown={(event) => handleTabKeyDown(event, registryTabs.indexOf(tab))}
+                      onKeyDown={(event) => handleTabKeyDown(event, idx)}
                     >
-                      <Icon size={16} />
-                      <span>{tab.label}</span>
-                      <ArrowRight size={14} className="registry-tab__arrow" />
+                      <span className="registry-tab__icon"><Icon size={16} /></span>
+                      <div className="registry-tab__text">
+                        <span className="registry-tab__title">{tab.label}</span>
+                        <span className="registry-tab__sub">{tab.subtitle}</span>
+                      </div>
+                      <ArrowRight size={14} className="registry-tab__arrow" aria-hidden="true" />
+                      {isActive && autoPlaying && <motion.span
+                        key={`${active}-progress`}
+                        className="registry-tab__progress"
+                        aria-hidden="true"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: REGISTRY_DURATION / 1000, ease: 'linear' }}
+                      />}
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            <div className="registry-console__main" role="tabpanel" id="registry-panel" aria-labelledby={`registry-tab-${activeRegistry.id}`} tabIndex={0}>
-              <div className="registry-panel-top">
-                <span className="mono-label">{activeRegistry.tag}</span>
-              </div>
+            <div
+              className="registry-console__main"
+              role="tabpanel"
+              id="registry-panel"
+              aria-labelledby={`registry-tab-${activeRegistry.id}`}
+              tabIndex={0}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeRegistry.id}
@@ -89,36 +112,29 @@ export function TrustRegistrySection() {
                     <div className="registry-agent-icon"><ActiveIcon size={20} /></div>
                     <div>
                       <div className="registry-agent-head__title">{activeRegistry.title}</div>
-                      <div className="registry-agent-head__sub">Traffic Law Agent</div>
+                      <div className="registry-agent-head__sub">Agent giao thông · Bản ghi ERC-8004</div>
                     </div>
                   </div>
                   <p className="registry-description">{activeRegistry.body}</p>
 
                   <div className="registry-fields">
-                    {activeRegistry.fields.map(([label, value]) => (
-                      <div className="registry-field" key={label}>
-                        <span>{label}</span>
-                        <span>{value}</span>
-                      </div>
-                    ))}
+                    {activeRegistry.fields.map(([label, value]) => {
+                      const isPending = value.includes('Chưa') || value.includes('Chờ');
+                      return (
+                        <div className="registry-field" key={label}>
+                          <span className="registry-field__label">{label}</span>
+                          <span className={`registry-field__value ${isPending ? 'is-pending' : ''}`}>
+                            {value}
+                          </span>
+                        </div>
+                      );
+                    })}
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
 
-          <div className="trust-flow">
-            <div className="trust-flow__caption">Trust lifecycle</div>
-            <div className="trust-flow__steps">
-              {flow.map((step, index) => (
-                <div className="trust-flow__item" key={step}>
-                  <span className={`trust-flow__number ${index === 0 ? 'is-highlighted' : ''}`}>{String(index + 1).padStart(2, '0')}</span>
-                  <span>{step}</span>
-                  {index < flow.length - 1 && <ArrowRight className="trust-flow__arrow" size={13} />}
-                </div>
-              ))}
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>
