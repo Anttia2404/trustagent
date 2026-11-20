@@ -12,7 +12,7 @@ export function CommunitySection() {
             <SectionHeading
               index="05"
               eyebrow="COMMUNITY CONTRIBUTION"
-              title={<>Help Improve Legal Intelligence.<br /><span>Get Rewarded for Verified Contributions.</span></>}
+              title={<>Help improve legal intelligence.<br /><span>Get rewarded for verified contributions.</span></>}
               description="A stronger legal knowledge base starts with people who know the source, spot the change and help verify what comes next."
             />
             <div className="reward-status-card"><div className="reward-status-card__icon"><CircleDollarSign size={19} /></div><div><Badge tone="amber">PLANNED · EXPERIMENTAL</Badge><p>Rewards are a future design concept, subject to review and approval.</p></div></div>
