@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, FileCheck2, FileText, Globe2, Layers3, ShieldCheck, X } from 'lucide-react';
 import { ActionLink, Button } from './components/ui';
 import { TopNavigation } from './components/TopNavigation';
@@ -16,15 +16,16 @@ const lawSource = 'https://xaydungchinhsach.chinhphu.vn/toan-van-luat-trat-tu-an
 
 function DocsDialog({ onClose }: { onClose: () => void }) {
   const { dialogRef, closeButtonRef } = useDialogAccessibility(onClose);
+  const reduceMotion = useReducedMotion();
   return (
     <div className="dialog-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <motion.div className="docs-dialog" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title" ref={dialogRef} tabIndex={-1} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.18 }}>
+      <motion.div className="docs-dialog" role="dialog" aria-modal="true" aria-labelledby="docs-dialog-title" ref={dialogRef} tabIndex={-1} initial={reduceMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={reduceMotion ? undefined : { opacity: 0, y: 8 }} transition={{ duration: reduceMotion ? 0 : 0.18 }}>
         <button ref={closeButtonRef} className="dialog-close" type="button" onClick={onClose} aria-label="Close dialog"><X size={18} /></button>
         <div className="docs-dialog__icon"><BookOpen size={20} /></div>
         <p className="eyebrow">Developer documentation</p>
         <h2 id="docs-dialog-title">Developer docs are in preparation.</h2>
-        <p>Production endpoints, registry deployments and payment configuration are not published in this preview. Explore the integration concepts below without treating them as a live API.</p>
-        <div className="docs-dialog__links"><a href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" rel="noreferrer" onClick={onClose}>ERC-8004 standard <ArrowUpRight size={14} /></a><a href="#payment" onClick={onClose}>See the x402 flow <ArrowRight size={14} /></a></div>
+        <p>The backend API and setup instructions are documented in the project README. This page does not connect to a live legal query or payment session.</p>
+        <div className="docs-dialog__links"><a href="https://github.com/minhtangithu0b123/Trust-Agent/blob/develop/README.md" target="_blank" rel="noreferrer" onClick={onClose}>Read backend README <ArrowUpRight size={14} /></a><a href="#payment" onClick={onClose}>See the x402 flow <ArrowRight size={14} /></a><a href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" rel="noreferrer" onClick={onClose}>Read ERC-8004 standard <ArrowUpRight size={14} /></a></div>
       </motion.div>
     </div>
   );
@@ -36,13 +37,13 @@ function HeroSection({ onDocsClick }: { onDocsClick: () => void }) {
       <div className="hero-copy">
         <p className="eyebrow"><span className="eyebrow-rule" /> Legal intelligence infrastructure <span className="eyebrow-location">Vietnam · built to travel</span></p>
         <h1>Legal answers,<br /><em>grounded in the law.</em></h1>
-        <p className="hero-subtitle">TrustAgent helps people and AI agents find and understand Vietnamese legal information, then inspect the cited sources behind an answer.</p>
+        <p className="hero-subtitle">TrustAgent helps people and AI agents find, understand, and verify Vietnamese legal information against its source.</p>
         <div className="hero-actions"><ActionLink href="#product" className="hero-action-primary">See a sourced answer <ArrowDownRight size={16} /></ActionLink><Button variant="secondary" onClick={onDocsClick}>Developer docs <ArrowUpRight size={15} /></Button></div>
-        <p className="hero-product-note"><span><Check size={14} /> Version-aware sources</span><span><Check size={14} /> Cited provisions</span><span><Check size={14} /> Evidence trail</span></p>
+        <p className="hero-product-note"><span><Check size={14} /> Vietnamese legal corpus</span><span><Check size={14} /> Cited provisions</span><span><Check size={14} /> Evidence checks</span></p>
       </div>
       <div className="hero-visual" aria-label="Illustrative legal answer preview">
         <article className="answer-sheet">
-          <div className="answer-sheet__masthead"><span>TrustAgent <i>Legal answer</i></span><span className="document-id">VN · TRAFFIC · 033</span></div>
+          <div className="answer-sheet__masthead"><span>TrustAgent <i>Legal answer</i></span><span className="document-id">VIETNAM · TRAFFIC</span></div>
           <p className="answer-sheet__label">A question about Vietnamese traffic law</p>
           <h2>Do motorcycle riders and passengers both need to wear a helmet?</h2>
           <div className="answer-sheet__answer"><span className="answer-sheet__answer-label">Short answer</span><p>Yes. The law requires both the driver and passengers on motorcycles and mopeds to wear helmets that meet national technical standards and to fasten the chin strap correctly.</p></div>
@@ -58,7 +59,7 @@ function HeroSection({ onDocsClick }: { onDocsClick: () => void }) {
 function ProductDemoSection() {
   return <section className="product-demo-section" id="product">
     <div className="shell">
-      <div className="section-intro section-intro--wide"><p className="eyebrow">01 / Product walkthrough</p><h2>From a question<br />to its legal source.</h2><p>Follow one answer back through the materials and provisions that support it. This is an illustrative product preview, not a live query.</p></div>
+      <div className="section-intro section-intro--wide"><p className="eyebrow">01 / Product walkthrough</p><h2>From a question<br />to its legal source.</h2><p>Follow a legal question through domain routing, hybrid retrieval and citation checks. This is an illustrative preview, not a live query.</p></div>
       <div className="product-workbench">
         <div className="workbench-rail"><span className="workbench-brand"><BrandMark size={28} /> TrustAgent</span><span className="workbench-rail__item is-current"><BookOpen size={16} /> Legal research</span><span className="workbench-rail__item"><Layers3 size={16} /> Source library</span><span className="workbench-rail__jurisdiction"><Globe2 size={15} /> Vietnam law</span></div>
         <div className="workbench-main">
@@ -67,9 +68,12 @@ function ProductDemoSection() {
           <div className="research-path" aria-label="Research path: question, source, provision, answer">
             <div><span>01</span><strong>Question</strong></div><i /><div><span>02</span><strong>Source</strong></div><i /><div><span>03</span><strong>Provision</strong></div><i /><div><span>04</span><strong>Answer</strong></div>
           </div>
+          <div className="retrieval-methods" aria-label="Retrieval implementation">
+            <span>Metadata query plan</span><i /><span>Chroma + BM25 · RRF</span><i /><span>Parent context</span><i /><span>Optional reranker · off by default</span>
+          </div>
           <div className="retrieved-document"><div className="retrieved-document__icon"><FileText size={19} /></div><div className="retrieved-document__text"><strong>Law on Road Traffic Order and Safety</strong><span>Law No. 36/2024/QH15 <b>·</b> In force 1 Jan 2025</span></div><span className="source-status"><Check size={13} /> Source</span></div>
           <div className="workbench-result"><div className="workbench-result__header"><span><ShieldCheck size={15} /> Cited answer</span><span>Vietnamese</span></div><p>Both the motorcycle driver and passengers must wear a helmet that meets national technical standards and fasten it correctly.</p><a href={lawSource} target="_blank" rel="noreferrer"><span>Article 33(2)</span> Open source text <ArrowUpRight size={14} /></a></div>
-          <p className="workbench-disclaimer">Illustrative preview. Informational assistance only; not a substitute for professional legal advice.</p>
+          <p className="workbench-disclaimer">Illustrative preview · informational assistance only · not a substitute for professional legal advice.</p>
         </div>
         <aside className="workbench-sources"><span className="workbench-label">Retrieved source</span><div className="source-card"><span className="source-card__number">01</span><div><strong>36/2024/QH15</strong><p>Law on Road Traffic Order and Safety</p><span>Article 33 · Motorcycle riders</span></div><ArrowUpRight size={15} /></div><div className="source-detail"><span>Jurisdiction</span><strong>Vietnam</strong></div><div className="source-detail"><span>Effective date</span><strong>01 Jan 2025</strong></div><div className="source-detail"><span>Reference</span><strong>Article 33(2)</strong></div><a className="source-official" href={lawSource} target="_blank" rel="noreferrer">Open official text <ArrowUpRight size={14} /></a></aside>
       </div>
@@ -80,7 +84,7 @@ function ProductDemoSection() {
 
 function FinalCallToAction({ onDocsClick }: { onDocsClick: () => void }) {
   return <section className="final-cta-section" id="developers"><div className="shell final-cta">
-    <div><p className="eyebrow">Infrastructure for people and agents</p><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Explore the agent concepts or review how identity, evidence and per-request payment fit together.</p></div>
+    <div><p className="eyebrow">Infrastructure for people and agents</p><h2>Build on legal intelligence<br /><em>you can trace.</em></h2><p>Review the implemented legal domains, evidence checks and optional paid traffic API route.</p></div>
     <div className="final-cta__actions"><ActionLink href="#agents" className="hero-action-primary">Explore legal agents <ArrowUpRight size={15} /></ActionLink><Button variant="secondary" onClick={onDocsClick}>Developer docs <ArrowUpRight size={15} /></Button></div>
   </div></section>;
 }
@@ -98,12 +102,12 @@ export default function App() {
       <ProductDemoSection />
       <EvidenceSection />
       <AgentMarketplace />
-      <div className="infrastructure-intro" id="infrastructure"><div className="shell"><p className="eyebrow">05 / Agent infrastructure</p><h2>Trust signals and payment,<br /><em>with distinct jobs.</em></h2><p>Protocols describe how agents identify, discover and pay for services. They do not establish that a legal answer is correct.</p></div></div>
+      <div className="infrastructure-intro" id="infrastructure"><div className="shell"><p className="eyebrow">04 / Agent infrastructure</p><h2>Trust signals and payment,<br /><em>with distinct jobs.</em></h2><p>ERC-8004 describes agent identity and trust signals; x402 handles HTTP payment. Neither protocol establishes that a legal answer is correct.</p></div></div>
       <TrustRegistrySection />
       <PaymentSection />
-      <CommunitySection />
-      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><p className="eyebrow">07 / Global infrastructure</p><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>TrustAgent focuses on Vietnamese legal intelligence today. The architecture is intended to support additional countries and jurisdictions as their sources, languages and rules are integrated.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Additional jurisdictions</strong><small>Architecture direction</small></div><span className="ledger-state">Future plan</span></div><div><span className="ledger-index">03</span><div><strong>Local legal sources</strong><small>Language · versions · effective dates</small></div><span className="ledger-state">Per jurisdiction</span></div></div></div></section>
       <ArchitectureSection />
+      <CommunitySection />
+      <section className="global-intro" id="global"><div className="shell global-intro__inner"><div><p className="eyebrow">06 / Global infrastructure</p><h2>One legal system at a time.<br /><em>Built to expand.</em></h2><p>Current corpus scope is Vietnamese traffic, labor and tax/invoice law. The architecture can expand to more jurisdictions as local sources, languages and legal metadata are integrated; temporal metadata is not yet consistent across the current corpus.</p></div><div className="jurisdiction-ledger"><div><span className="ledger-index">01</span><div><strong>Vietnam</strong><small>Initial focus</small></div><span className="ledger-state ledger-state--current">Current</span></div><div><span className="ledger-index">02</span><div><strong>Traffic · Labor · Tax</strong><small>Current legal domains</small></div><span className="ledger-state ledger-state--current">Implemented</span></div><div><span className="ledger-index">03</span><div><strong>Additional jurisdictions</strong><small>Local corpora and legal rules required</small></div><span className="ledger-state">Future plan</span></div></div></div></section>
       <FinalCallToAction onDocsClick={() => setDocsOpen(true)} />
     </main>
     <SiteFooter />

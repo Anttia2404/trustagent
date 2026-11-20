@@ -10,23 +10,22 @@ export function ArchitectureSection() {
         <Reveal>
           <div className="architecture-heading-row">
             <SectionHeading
-              index="06"
-              eyebrow="A CONNECTED TRUST STACK"
-              title={<>Separate layers.<br /><span>One verifiable system.</span></>}
-              description="Legal knowledge, agents, identity, payments, evidence and community work together — while each layer keeps a distinct role."
+              eyebrow="BACKEND REQUEST PATH"
+              title={<>Routing, retrieval<br /><span>and answer checks.</span></>}
+              description="The current service routes a legal query to one of three domain agents, retrieves evidence, then checks citations and quantitative claims before responding."
             />
-            <div className="architecture-key"><span><i className="architecture-key__line" /> Connected flow</span><Badge tone="neutral">SYSTEM MAP · CONCEPT</Badge></div>
+            <div className="architecture-key"><span><i className="architecture-key__line" /> Request flow</span><Badge tone="neutral">CURRENT BACKEND</Badge></div>
           </div>
         </Reveal>
 
         <Reveal className="architecture-map">
-          <div className="architecture-map__top"><div className="architecture-map__title"><Network size={16} /><span>TrustAgent architecture</span></div><span className="mono-label">6 INTERCONNECTED LAYERS</span></div>
+          <div className="architecture-map__top"><div className="architecture-map__title"><Network size={16} /><span>TrustAgent request path</span></div><span className="mono-label">QUESTION TO CHECKED RESPONSE</span></div>
           <div className="architecture-layers">
-            {architectureLayers.map((layer, index) => {
+            {architectureLayers.map((layer) => {
               const Icon = layer.icon;
               return (
                 <div className={`architecture-layer architecture-layer--${layer.color}`} key={layer.id}>
-                  <div className="architecture-layer__label"><span className="architecture-layer__number">{layer.number}</span><span className="architecture-layer__icon"><Icon size={16} /></span><div><strong>{layer.label}</strong><small>{index === 2 ? 'ERC-8004' : index === 3 ? 'x402 · USDC' : 'TRUSTAGENT'}</small></div></div>
+                  <div className="architecture-layer__label"><span className="architecture-layer__number">{layer.number}</span><span className="architecture-layer__icon"><Icon size={16} /></span><div><strong>{layer.label}</strong><small>{layer.tag}</small></div></div>
                   <div className="architecture-layer__flow">
                     {layer.nodes.map((node, nodeIndex) => (
                       <div className="architecture-node-wrap" key={node}>
@@ -40,7 +39,7 @@ export function ArchitectureSection() {
               );
             })}
           </div>
-          <div className="architecture-map__footer"><span>Separate protocols, explicit hand-offs.</span><span>Illustrative architecture · not a deployment claim</span></div>
+          <div className="architecture-map__footer"><span>Conversation store: SQLite or PostgreSQL · LangGraph checkpoint: SQLite.</span><span>Paid traffic endpoint uses x402 only when configured.</span></div>
         </Reveal>
       </div>
     </section>

@@ -1,9 +1,11 @@
 import type { LucideIcon } from 'lucide-react';
-import { BookOpenCheck, Calculator, FileText, Landmark, BriefcaseBusiness, ShieldCheck, Fingerprint, ScanEye, FileSearch, CircleDollarSign, Database, UsersRound, Layers3, Workflow, ReceiptText } from 'lucide-react';
+import { BookOpenCheck, Calculator, FileText, BriefcaseBusiness, ShieldCheck, Fingerprint, ScanEye, FileSearch, CircleDollarSign, Database, Layers3, Workflow } from 'lucide-react';
 
-export type AgentStatus = 'MVP' | 'COMING SOON';
+export type AgentStatus = 'IMPLEMENTED' | 'ROADMAP';
 
 export interface LegalAgent {
+  domain: 'traffic' | 'labor' | 'tax';
+  collection: string;
   name: string;
   specialty: string;
   status: AgentStatus;
@@ -14,24 +16,19 @@ export interface LegalAgent {
 
 export const agents: LegalAgent[] = [
   {
-    name: 'Traffic Law Agent', specialty: 'Vietnamese traffic regulations & penalties', status: 'MVP', icon: BookOpenCheck, accent: 'green',
-    capabilities: ['Legal Q&A', 'Cited provisions', 'Version-aware lookup'],
+    domain: 'traffic', collection: 'legal_traffic',
+    name: 'Traffic Law Agent', specialty: 'Vietnamese traffic regulations and penalties', status: 'IMPLEMENTED', icon: BookOpenCheck, accent: 'green',
+    capabilities: ['Legal Q&A', 'Hybrid retrieval', 'Citation guardrail'],
   },
   {
-    name: 'Accounting Law Agent', specialty: 'Accounting standards & compliance', status: 'MVP', icon: Calculator, accent: 'blue',
-    capabilities: ['Accounting research', 'Source references', 'Compliance context'],
+    domain: 'labor', collection: 'legal_labor',
+    name: 'Labor Law Agent', specialty: 'Vietnamese employment and workplace regulations', status: 'IMPLEMENTED', icon: BriefcaseBusiness, accent: 'blue',
+    capabilities: ['Legal Q&A', 'Hybrid retrieval', 'Citation guardrail'],
   },
   {
-    name: 'Labor Law Agent', specialty: 'Employment law & workplace policy', status: 'COMING SOON', icon: BriefcaseBusiness, accent: 'amber',
-    capabilities: ['Employment Q&A', 'Regulation discovery', 'Cited guidance'],
-  },
-  {
-    name: 'Tax Law Agent', specialty: 'Tax obligations & statutory guidance', status: 'COMING SOON', icon: ReceiptText, accent: 'violet',
-    capabilities: ['Tax research', 'Document references', 'Policy context'],
-  },
-  {
-    name: 'Enterprise Law Agent', specialty: 'Business operations & legal workflows', status: 'COMING SOON', icon: Landmark, accent: 'neutral',
-    capabilities: ['Enterprise research', 'Legal workflows', 'Source discovery'],
+    domain: 'tax', collection: 'legal_accounting',
+    name: 'Tax Agent', specialty: 'Vietnamese tax and invoice regulations', status: 'IMPLEMENTED', icon: Calculator, accent: 'amber',
+    capabilities: ['Tax research', 'Source references', 'Citation guardrail'],
   },
 ];
 
@@ -43,7 +40,7 @@ export const registryTabs = [
     fields: [
       ['Agent', 'Traffic Law Agent'],
       ['Registration status', 'Not registered · illustrative'],
-      ['Agent ID', 'Demo placeholder · not registered'],
+      ['Agent ID', 'Illustrative profile · unregistered'],
       ['Capabilities', 'Vietnamese traffic law · cited answers'],
       ['Service endpoint', 'Not connected · illustrative'],
     ],
@@ -73,13 +70,13 @@ export const registryTabs = [
 ] as const;
 
 export const evidenceSteps = [
-  { icon: FileText, title: 'Legal documents', detail: 'Source & effective date' },
-  { icon: Database, title: 'Versioned RAG', detail: 'Index & provisions' },
-  { icon: FileSearch, title: 'Answer + citations', detail: 'Relevant legal basis' },
-  { icon: Fingerprint, title: 'Evidence record', detail: 'Request & answer ref' },
-  { icon: Layers3, title: 'Batch commitment', detail: 'Merkle root · example' },
-  { icon: Workflow, title: 'Optional anchor', detail: 'On-chain · roadmap' },
-  { icon: ShieldCheck, title: 'Independent check', detail: 'Integrity verification' },
+  { icon: FileText, title: 'Legal question', detail: 'Traffic API request' },
+  { icon: Database, title: 'RAG answer', detail: 'Retrieved legal evidence' },
+  { icon: FileSearch, title: 'Citations', detail: 'Documents & provisions' },
+  { icon: Fingerprint, title: 'Receipt', detail: 'Paid endpoint · when enabled' },
+  { icon: Layers3, title: 'Merkle batch', detail: 'Prepared separately' },
+  { icon: Workflow, title: 'Chain anchor', detail: 'No live automation' },
+  { icon: ShieldCheck, title: 'Integrity check', detail: 'Receipt proof endpoint' },
 ] as const;
 
 export const paymentSteps = [
@@ -123,6 +120,7 @@ export interface ArchitectureLayer {
   id: string;
   number: string;
   label: string;
+  tag: string;
   icon: LucideIcon;
   color: string;
   nodes: string[];
@@ -130,27 +128,27 @@ export interface ArchitectureLayer {
 
 export const architectureLayers: ArchitectureLayer[] = [
   {
-    id: 'knowledge', number: '01', label: 'Legal knowledge', icon: BookOpenCheck, color: 'green',
-    nodes: ['Vietnamese traffic law documents', 'Normalization', 'Versioned RAG', 'Citation verification'],
+    id: 'client', number: '01', label: 'Client', tag: 'NEXT.JS', icon: BookOpenCheck, color: 'green',
+    nodes: ['Next.js frontend', 'Next.js API proxy'],
   },
   {
-    id: 'agents', number: '02', label: 'Agent layer', icon: Workflow, color: 'blue',
-    nodes: ['TrustAgent orchestrator', 'Traffic law agent', 'Accounting agent', 'Future legal agents'],
+    id: 'api', number: '02', label: 'API & routing', tag: 'FASTAPI · LANGGRAPH', icon: Workflow, color: 'blue',
+    nodes: ['FastAPI', 'LangGraph router', 'Traffic · Labor · Tax agents'],
   },
   {
-    id: 'trust', number: '03', label: 'Trust layer', icon: ShieldCheck, color: 'violet',
-    nodes: ['ERC-8004 identity', 'Reputation registry', 'Validation registry'],
+    id: 'retrieval', number: '03', label: 'Legal retrieval', tag: 'CHROMA · BM25 · RRF', icon: FileSearch, color: 'amber',
+    nodes: ['Metadata-aware query plan', 'Chroma + BM25', 'RRF + parent context', 'Optional reranker · off by default'],
   },
   {
-    id: 'payment', number: '04', label: 'Payment layer', icon: CircleDollarSign, color: 'amber',
-    nodes: ['External AI agent', 'x402 payment', 'USDC payment', 'Legal API response'],
+    id: 'answer', number: '04', label: 'Answer & safety', tag: 'OPENAI / GEMINI', icon: ShieldCheck, color: 'green',
+    nodes: ['OpenAI or Gemini', 'Self-RAG / reflection', 'Citation checks', 'Quantitative guardrail'],
   },
   {
-    id: 'evidence', number: '05', label: 'Evidence layer', icon: Fingerprint, color: 'cyan',
-    nodes: ['Answer + citations', 'Evidence record', 'Batch commitment', 'Blockchain anchor'],
+    id: 'storage', number: '05', label: 'State & corpus', tag: 'SQLITE · POSTGRESQL', icon: Database, color: 'neutral',
+    nodes: ['Chroma legal collections', 'SQLite / PostgreSQL conversations', 'SQLite LangGraph checkpoints'],
   },
   {
-    id: 'community', number: '06', label: 'Community layer', icon: UsersRound, color: 'rose',
-    nodes: ['Contributors', 'Qualified reviewers', 'Approved legal updates', 'Planned rewards'],
+    id: 'payment', number: '06', label: 'Optional paid route', tag: 'X402 · WHEN ENABLED', icon: CircleDollarSign, color: 'blue',
+    nodes: ['POST /paid/traffic/ask', 'x402 payment middleware', 'Answer + citations + provenance receipt'],
   },
 ];

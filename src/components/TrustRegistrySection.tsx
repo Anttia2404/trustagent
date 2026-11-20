@@ -1,5 +1,5 @@
 import { useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ExternalLink, Fingerprint, MessageSquareText, ShieldCheck } from 'lucide-react';
 import { registryTabs } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
@@ -11,6 +11,7 @@ type RegistryId = (typeof registryTabs)[number]['id'];
 
 export function TrustRegistrySection() {
   const [active, setActive] = useState<RegistryId>('identity');
+  const reduceMotion = useReducedMotion();
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const activeRegistry = registryTabs.find((item) => item.id === active) ?? registryTabs[0];
   const ActiveIcon = activeRegistry.icon;
@@ -34,10 +35,9 @@ export function TrustRegistrySection() {
         <div className="split-heading">
           <Reveal>
             <SectionHeading
-              index="01"
-              eyebrow="ERC-8004 · TRUST LAYER"
-              title={<>Every Agent Has an Identity.<br /><span>Every Interaction Builds Reputation.</span></>}
-              description="Make specialized legal agents discoverable, identifiable and independently reviewable across the agent ecosystem."
+              eyebrow="ERC-8004 · CONCEPTUAL TRUST LAYER"
+              title={<>Agent identity and reputation<br /><span>are different trust signals.</span></>}
+              description="ERC-8004 defines identity, feedback and validation registries for agents. This section explains the standard; TrustAgent registry records are not connected here."
             />
           </Reveal>
           <Reveal delay={0.08}>
@@ -90,10 +90,10 @@ export function TrustRegistrySection() {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeRegistry.id}
-                  initial={{ opacity: 0, y: 8 }}
+                  initial={reduceMotion ? false : { opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.2 }}
+                  exit={reduceMotion ? undefined : { opacity: 0, y: -6 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.2 }}
                   className="registry-panel-content"
                 >
                   <div className="registry-agent-head">

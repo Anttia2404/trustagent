@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Check, CircleDashed, Fingerprint, ShieldCheck, X } from 'lucide-react';
+import { ArrowUpRight, Database, Fingerprint, ShieldCheck, X } from 'lucide-react';
 import { agents, type LegalAgent } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -14,20 +14,20 @@ function AgentDialog({ agent, onClose }: { agent: LegalAgent; onClose: () => voi
       <div ref={dialogRef} tabIndex={-1} className="agent-dialog" role="dialog" aria-modal="true" aria-labelledby="agent-dialog-title">
         <button ref={closeButtonRef} className="dialog-close" type="button" onClick={onClose} aria-label="Close details"><X size={18} /></button>
         <div className={`agent-icon agent-icon--${agent.accent}`}><Icon size={20} /></div>
-        <Badge tone={agent.status === 'MVP' ? 'green' : 'neutral'}>{agent.status === 'MVP' ? 'MVP · DEMO PROFILE' : 'ROADMAP'}</Badge>
+        <Badge tone={agent.status === 'IMPLEMENTED' ? 'green' : 'neutral'}>{agent.status === 'IMPLEMENTED' ? 'IMPLEMENTED · BACKEND' : 'ROADMAP'}</Badge>
         <h3 id="agent-dialog-title">{agent.name}</h3>
         <p>{agent.specialty}</p>
         <div className="dialog-details">
-          <div><span>ERC-8004 identity</span><strong>Not connected · placeholder</strong></div>
-          <div><span>Agent ID</span><strong>Not registered in this demo</strong></div>
-          <div><span>x402 payment</span><strong>Conceptual integration · not live</strong></div>
-          <div><span>Reputation / validation</span><strong>No production records</strong></div>
+          <div><span>Public domain</span><strong>{agent.domain}</strong></div>
+          <div><span>Corpus collection</span><strong>{agent.collection}</strong></div>
+          <div><span>Question endpoint</span><strong>POST /domains/{agent.domain}/ask</strong></div>
+          <div><span>Retrieval & safety</span><strong>Hybrid search · citation checks</strong></div>
         </div>
         <div className="dialog-capabilities">
-          <span className="mono-label">ILLUSTRATIVE CAPABILITIES</span>
+          <span className="mono-label">IMPLEMENTED PIPELINE</span>
           <div>{agent.capabilities.map((capability) => <span key={capability}>{capability}</span>)}</div>
         </div>
-        <p className="dialog-disclaimer">This profile is a UI demonstration, not a deployed registry record or production API listing.</p>
+        <p className="dialog-disclaimer">This landing-page panel is illustrative. API availability depends on the backend deployment and its configuration.</p>
       </div>
     </div>
   );
@@ -42,25 +42,25 @@ export function AgentMarketplace() {
         <Reveal>
           <div className="marketplace-heading">
             <SectionHeading
-              index="02"
-              eyebrow="AGENT DISCOVERY"
-              title={<>Find the Right Legal Agent.<br /><span>Connect. Pay. Verify.</span></>}
-              description="Specialized legal intelligence, packaged for people and machines. Explore the current product direction — clearly marked as demo or roadmap."
+              index="03"
+              eyebrow="IMPLEMENTED BACKEND DOMAINS"
+              title={<>Legal agents across<br /><span>three Vietnam domains.</span></>}
+              description="The backend routes legal questions to traffic, labor and tax agents. Each uses hybrid retrieval and checks citations before returning an answer."
             />
-            <div className="marketplace-count"><span>05</span><small>AGENT<br />CONCEPTS</small></div>
+            <div className="marketplace-count"><span>03</span><small>SUPPORTED<br />DOMAINS</small></div>
           </div>
         </Reveal>
 
         <div className="agent-grid">
           {agents.map((agent, index) => {
             const Icon = agent.icon;
-            const isMvp = agent.status === 'MVP';
+            const isImplemented = agent.status === 'IMPLEMENTED';
             return (
               <Reveal key={agent.name} delay={index * 0.045} className={`agent-card-wrap ${index < 2 ? 'agent-card-wrap--featured' : ''}`}>
-                <article className={`agent-card ${isMvp ? 'agent-card--mvp' : ''}`}>
+                <article className={`agent-card ${isImplemented ? 'agent-card--implemented' : ''}`}>
                   <div className="agent-card__top">
                     <div className={`agent-icon agent-icon--${agent.accent}`}><Icon size={20} /></div>
-                    <Badge tone={isMvp ? 'green' : 'neutral'}>{isMvp ? 'ACTIVE · MVP' : 'COMING SOON'}</Badge>
+                    <Badge tone={isImplemented ? 'green' : 'neutral'}>{isImplemented ? 'IMPLEMENTED' : 'ROADMAP'}</Badge>
                   </div>
                   <h3>{agent.name}</h3>
                   <p className="agent-card__specialty">{agent.specialty}</p>
@@ -68,10 +68,9 @@ export function AgentMarketplace() {
                     {agent.capabilities.map((capability) => <span key={capability}>{capability}</span>)}
                   </div>
                   <div className="agent-card__meta">
-                    <div className="agent-meta-row"><span><Fingerprint size={13} /> Agent ID · demo placeholder</span><strong>{isMvp ? 'Not registered' : 'Not assigned · roadmap'}</strong></div>
-                    <div className="agent-meta-row"><span><CircleDashed size={13} /> ERC-8004 identity</span><strong>{isMvp ? 'Demo placeholder' : 'Roadmap'}</strong></div>
-                    <div className="agent-meta-row"><span><Check size={13} /> x402 payment</span><strong>Concept · not live</strong></div>
-                    <div className="agent-meta-row"><span><ShieldCheck size={13} /> Reputation / validation</span><strong>No production records</strong></div>
+                    <div className="agent-meta-row"><span><Fingerprint size={13} /> Public domain</span><strong>{agent.domain}</strong></div>
+                    <div className="agent-meta-row"><span><Database size={13} /> Chroma collection</span><strong>{agent.collection}</strong></div>
+                    <div className="agent-meta-row"><span><ShieldCheck size={13} /> Citation checks</span><strong>Implemented</strong></div>
                   </div>
                   <button type="button" className="agent-card__action" onClick={() => setSelected(agent)}>
                     View Agent Details <ArrowUpRight size={15} />
@@ -82,7 +81,7 @@ export function AgentMarketplace() {
           })}
         </div>
 
-        <div className="marketplace-footnote"><ShieldCheck size={15} /> All profiles, capabilities and status labels are illustrative. No real Agent IDs, registry records or production endpoints are represented.</div>
+        <div className="marketplace-footnote"><ShieldCheck size={15} /> Tax data covers tax and invoices; the internal `legal_accounting` collection is not a complete independent accounting corpus. ERC-8004 identity records are not connected.</div>
       </div>
       {selected && <AgentDialog agent={selected} onClose={() => setSelected(null)} />}
     </section>
