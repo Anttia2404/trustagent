@@ -1,10 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
-import { BookOpenCheck, Calculator, FileText, BriefcaseBusiness, ShieldCheck, Fingerprint, ScanEye, FileSearch, CircleDollarSign, Database, Layers3, Workflow } from 'lucide-react';
+import { BookOpenCheck, Calculator, FileText, BriefcaseBusiness, ShieldCheck, Fingerprint, ScanEye, FileSearch, Database, Layers3, Workflow } from 'lucide-react';
 
 export type AgentStatus = 'IMPLEMENTED' | 'ROADMAP';
-
-/** Backend API and setup docs live in the project README until dedicated docs exist. */
-export const apiReadmeUrl = 'https://github.com/minhtangithu0b123/Trust-Agent/blob/develop/README.md';
 
 export interface LegalAgent {
   domain: 'traffic' | 'labor' | 'tax';
@@ -91,67 +88,3 @@ export const paymentSteps = [
   'Legal agent executes RAG',
   'Answer + citations + evidence receipt',
 ] as const;
-
-export const contributionTypes = [
-  {
-    id: 'documents', title: 'Submit legal documents', icon: FileText,
-    description: 'Share new laws or amendments. Source and validity are checked first.',
-    tags: ['Source check', 'Version history'],
-  },
-  {
-    id: 'reports', title: 'Report an answer', icon: FileSearch,
-    description: 'Flag a wrong answer with its legal source. A reviewer checks it.',
-    tags: ['Evidence required', 'Reviewer-led'],
-  },
-  {
-    id: 'review', title: 'Review & validate', icon: ShieldCheck,
-    description: 'Reviewers verify documents and corrections, with an audit trail.',
-    tags: ['Human review', 'Auditable'],
-  },
-] as const;
-
-export const rewardSteps = [
-  'Contribution submitted',
-  'Quality & authenticity checks',
-  'Human review',
-  'Approved contribution',
-  'Reward issued',
-  'Contribution history',
-] as const;
-
-export interface ArchitectureLayer {
-  id: string;
-  number: string;
-  label: string;
-  tag: string;
-  icon: LucideIcon;
-  color: string;
-  nodes: string[];
-}
-
-export const architectureLayers: ArchitectureLayer[] = [
-  {
-    id: 'client', number: '01', label: 'Client', tag: 'NEXT.JS', icon: BookOpenCheck, color: 'green',
-    nodes: ['Next.js frontend', 'Next.js API proxy'],
-  },
-  {
-    id: 'api', number: '02', label: 'API & routing', tag: 'FASTAPI · LANGGRAPH', icon: Workflow, color: 'blue',
-    nodes: ['FastAPI', 'LangGraph router', 'Traffic · Labor · Tax agents'],
-  },
-  {
-    id: 'retrieval', number: '03', label: 'Legal retrieval', tag: 'CHROMA · BM25 · RRF', icon: FileSearch, color: 'amber',
-    nodes: ['Metadata-aware query plan', 'Chroma + BM25', 'RRF + parent context', 'Optional reranker · off by default'],
-  },
-  {
-    id: 'answer', number: '04', label: 'Answer & safety', tag: 'OPENAI / GEMINI', icon: ShieldCheck, color: 'green',
-    nodes: ['OpenAI or Gemini', 'Self-RAG / reflection', 'Citation checks', 'Quantitative guardrail'],
-  },
-  {
-    id: 'storage', number: '05', label: 'State & corpus', tag: 'SQLITE · POSTGRESQL', icon: Database, color: 'neutral',
-    nodes: ['Chroma legal collections', 'SQLite / PostgreSQL conversations', 'SQLite LangGraph checkpoints'],
-  },
-  {
-    id: 'payment', number: '06', label: 'Optional paid route', tag: 'X402 · WHEN ENABLED', icon: CircleDollarSign, color: 'blue',
-    nodes: ['POST /paid/traffic/ask', 'x402 payment middleware', 'Answer + citations + provenance receipt'],
-  },
-];

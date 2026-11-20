@@ -1,6 +1,6 @@
 import { useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ExternalLink, Fingerprint } from 'lucide-react';
+import { ArrowRight, Fingerprint } from 'lucide-react';
 import { registryTabs } from '../lib/content';
 import { Badge, SectionHeading } from './ui';
 import { Reveal } from './Reveal';
@@ -37,13 +37,8 @@ export function TrustRegistrySection() {
             <SectionHeading
               level={3}
               title={<>Agent identity and reputation<br /><span>are different trust signals.</span></>}
-              description="ERC-8004 gives agents separate identity, feedback and validation records. TrustAgent is not connected to them yet."
+              description="Identity, feedback and validation are separate ERC-8004 records. TrustAgent is not connected to them yet."
             />
-          </Reveal>
-          <Reveal delay={0.08}>
-            <a className="standard-link" href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" rel="noreferrer">
-              Read the ERC-8004 standard <ExternalLink size={14} />
-            </a>
           </Reveal>
         </div>
 

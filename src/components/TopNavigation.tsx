@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowDown, Menu, X } from 'lucide-react';
 import { BrandMark } from './BrandMark';
 import { ActionLink } from './ui';
-import { apiReadmeUrl } from '../lib/content';
 
 const links = [
   { label: 'Product', href: '#product' },
-  { label: 'Evidence', href: '#evidence' },
   { label: 'Legal agents', href: '#agents' },
-  { label: 'Infrastructure', href: '#infrastructure' },
-  { label: 'Global', href: '#global' },
+  { label: 'On-chain trust', href: '#infrastructure' },
+  { label: 'Receipts', href: '#evidence' },
 ];
 
-/** Page sections in document order. Sections without a nav link clear the highlight. */
-const sectionOrder = ['product', 'evidence', 'agents', 'infrastructure', 'community', 'global', 'developers'];
-const linkedSections = new Set(links.map((link) => link.href.slice(1)));
+/** Page sections in document order, each mapped to the nav item it belongs to (null clears the highlight). */
+const sectionOrder: Array<[id: string, navId: string | null]> = [
+  ['product', 'product'],
+  ['agents', 'agents'],
+  ['infrastructure', 'infrastructure'],
+  ['trust', 'infrastructure'],
+  ['payment', 'infrastructure'],
+  ['evidence', 'evidence'],
+  ['developers', null],
+];
 
 /** Returns the id of the nav-linked section currently under the top third of the viewport. */
 function useActiveSection() {
@@ -26,11 +31,11 @@ function useActiveSection() {
       frame = 0;
       const readingLine = window.innerHeight * 0.35;
       let current: string | null = null;
-      for (const id of sectionOrder) {
+      for (const [id, navId] of sectionOrder) {
         const element = document.getElementById(id);
-        if (element && element.getBoundingClientRect().top <= readingLine) current = id;
+        if (element && element.getBoundingClientRect().top <= readingLine) current = navId;
       }
-      setActive(current && linkedSections.has(current) ? current : null);
+      setActive(current);
     };
     const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
 
@@ -68,8 +73,8 @@ export function TopNavigation() {
 
         <div className="site-header__actions">
           <span className="header-status"><span className="status-dot" /> Infrastructure preview</span>
-          <ActionLink className="header-cta" href={apiReadmeUrl} target="_blank" rel="noreferrer">
-            API README <ArrowUpRight size={14} aria-hidden="true" />
+          <ActionLink className="header-cta" href="#developers">
+            API <ArrowDown size={14} aria-hidden="true" />
           </ActionLink>
           <button
             type="button"
@@ -88,8 +93,8 @@ export function TopNavigation() {
           {links.map((link) => (
             <a key={link.href} href={link.href} onClick={closeMenu} {...currentProps(link.href)}>{link.label}</a>
           ))}
-          <a href={apiReadmeUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>
-            API README <ArrowUpRight size={15} aria-hidden="true" />
+          <a href="#developers" onClick={closeMenu}>
+            API <ArrowDown size={15} aria-hidden="true" />
           </a>
         </nav>
       )}

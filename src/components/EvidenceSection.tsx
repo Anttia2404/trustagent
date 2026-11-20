@@ -19,6 +19,7 @@ export function EvidenceSection() {
         <Reveal>
           <div className="evidence-heading-grid">
             <SectionHeading
+              level={3}
               title={<>Inspect the sources<br /><span>behind an answer.</span></>}
               description="Paid answers can include a receipt: answer hash, cited sources and index version."
             />
